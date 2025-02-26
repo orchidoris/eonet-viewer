@@ -1,0 +1,95 @@
+syntax = "proto3";
+
+option csharp_namespace = "EonetViewer.Api.Protos";
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
+
+package events;
+
+// The events service definition.
+service EventsService {
+  // Gets events based on the provided filters.
+  rpc GetEvents (EventsRequest) returns (EventsResponse);
+}
+
+// Filter based on events having a closed date.
+enum EventStatus {
+  OPEN = 0; // Events have no closed date.
+  CLOSED = 1; // Events have a closed date.
+  ALL = 2; // All events, regardless of having a closed date or not.
+}
+
+// Represents filters for querying events from the EONET API.
+message EventsRequest {
+  repeated string sources = 1; // Filter by event sources, none - means all sources.
+  repeated string categories = 2; // Filter by event categories, none - means all categories.
+  EventStatus status = 3; // Filter based on events having a closed date.
+  optional int32 limit = 4; // Limits the number of events returned.
+  optional int32 days = 5; // Limit the number of prior days (including today) from which events will be returned.
+  optional google.protobuf.Timestamp start = 6; // Min date of events.
+  optional google.protobuf.Timestamp end = 7; // Max date of events.
+  optional MagnitudeFilter magnitude = 8; // A ceiling, floor, or range of magnitude values for the events.
+  optional BoundingBox bounding_box = 9; // A bounding box for event coordinates to fall into.
+}
+
+// Ceiling, floor, or range of magnitude values for the events to fall between (inclusive).
+message MagnitudeFilter {
+  string id = 1; // Unique id of magnitude unit.
+  optional double min = 2; // Optional min magnitude value.
+  optional double max = 3; // Optional min magnitude value.
+}
+
+// Bounding box to filter events by coordinates.
+message BoundingBox {
+  double min_longitude = 1; // Minimum longitude (left boundary).
+  double max_latitude = 2; // Maximum latitude (top boundary).
+  double max_longitude = 3; // Maximum longitude (right boundary).
+  double min_latitude = 4; // Minimum latitude (bottom boundary).
+}
+
+// Response containing natural events.
+message EventsResponse {
+	repeated Event events = 1; // A list of natural events.
+}
+
+// Natural event.
+message Event {
+  string id = 1; // Unique event id.
+  string title = 2; // Title of the event.
+  optional string description = 3; // Optional longer description of the event. Most likely only a sentence or two.
+  string link = 4; // Full link to the API endpoint for this specific event.
+  optional google.protobuf.Timestamp closed_date = 5; // Event is deemed “closed” when it has ended. The closed field will include a date/time when the event has ended. Depending upon the nature of the event, the closed value may or may not accurately represent the absolute ending of the event. If the event is open, this will show “null”.
+  optional int32 closed_date_offset_minutes = 6; // Offset for the closed_date field, usually 0 unless the source provided a particular offset.
+  repeated EventCategory categories = 7; // One or more categories assigned to the event.
+  repeated EventSource sources = 8; // One or more sources that refer to more information about the event.
+  repeated EventGeometry geometries = 9; // One or more event geometries are the pairing of a specific date/time with a location. The date/time will most likely be 00:00Z unless the source provided a particular time. The geometry will be a GeoJSON object of either type “Point” or “Polygon”.
+}
+
+// Mapping from a natural event to a category.
+message EventCategory {
+	string id = 1; // Unique category id.
+	string title = 2; // Title of the category.
+}
+
+// Mapping from a natural event to a source.
+message EventSource {
+	string id = 1; // Unique source id.
+	string url = 2; // Url of this specific event in the original source.
+}
+
+// Geometry of a natural event.
+message EventGeometry {
+  google.protobuf.Timestamp date = 1; // Date and time of the event.
+  int32 date_offset_minutes = 2; // Offset for the date field, usually 0 unless the source provided a particular offset.
+  string type = 3; // Type of geometry, usually "Point" but "Polygon" is possible.
+  Coordinates coordinates = 4; // Coordinates of the event.
+  optional string magnitude_unit = 5; // Unit of the magnitude value.
+  optional google.protobuf.DoubleValue magnitude_value = 6; // Magnitude value of the event.
+}
+
+// Position of event geometry
+message Coordinates {
+	double latitude = 1; // Latitude of the position.
+	double longitude = 2; // Longitude of the position.
+}

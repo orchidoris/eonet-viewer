@@ -1,0 +1,6 @@
+@EonetViewer.Server_HostAddress = http://localhost:5001
+
+GET {{EonetViewer.Server_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
