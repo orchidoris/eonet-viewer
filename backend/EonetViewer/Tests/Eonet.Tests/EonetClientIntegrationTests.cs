@@ -24,7 +24,7 @@ public sealed class EonetClientIntegrationTests
 
         _server = new TestServer(new WebHostBuilder()
             .Configure(app => { })
-            .ConfigureServices(services => services.AddEonetClients(configuration)));
+            .ConfigureServices(services => services.AddEonet(configuration)));
 
         _client = _server.Services.GetRequiredService<IEonetClient>();
     }

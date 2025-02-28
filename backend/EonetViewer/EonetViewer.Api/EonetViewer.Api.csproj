@@ -4,13 +4,13 @@
     <TargetFramework>net9.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <SpaRoot>..\..\..\frontend\eonet-viewer</SpaRoot>
+    <SpaRoot>..\..\..\frontend\eonet-viewer-client</SpaRoot>
     <SpaProxyLaunchCommand>npm run dev</SpaProxyLaunchCommand>
     <SpaProxyServerUrl>https://localhost:62857</SpaProxyServerUrl>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\frontend\eonet-viewer\eonet-viewer.esproj">
+    <ProjectReference Include="..\..\..\frontend\eonet-viewer-client\eonet-viewer-client.esproj">
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
     <ProjectReference Include="..\Eonet\Eonet.csproj" />
@@ -22,6 +22,7 @@
 
   <ItemGroup>
     <PackageReference Include="Grpc.AspNetCore" Version="2.67.0" />
+    <PackageReference Include="Grpc.AspNetCore.Web" Version="2.67.0" />
     <PackageReference Include="Microsoft.AspNetCore.SpaProxy">
       <Version>9.*-*</Version>
     </PackageReference>

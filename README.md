@@ -1,8 +1,10 @@
 # EONET Events Viewer
 
-This is a demo project to play with features of .NET, React, etc.
+This is a demo project using [EONET API](https://eonet.gsfc.nasa.gov/docs/v3) to play with features of .NET, React, etc.
 
 ## How to run
+
+⬇️ Get the repo locally.
 
 🚀 Run [start.cmd](/start.cmd) on Windows.
 

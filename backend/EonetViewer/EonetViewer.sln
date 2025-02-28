@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eonet", "Eonet\Eonet.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EonetViewer.Api", "EonetViewer.Api\EonetViewer.Api.csproj", "{3EB890C0-6F9D-4997-A99F-3244F6BCD5E1}"
 EndProject
-Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "eonet-viewer", "..\..\frontend\eonet-viewer\eonet-viewer.esproj", "{F78D88D8-FEB9-4304-87D6-B26E2EA2265C}"
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "eonet-viewer-client", "..\..\frontend\eonet-viewer-client\eonet-viewer-client.esproj", "{F78D88D8-FEB9-4304-87D6-B26E2EA2265C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{53BCA2A7-BE1B-4E7F-97D6-502C87E67219}"
 EndProject

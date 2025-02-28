@@ -1,14 +1,12 @@
 ﻿using Eonet;
 using Google.Protobuf.WellKnownTypes;
-using Google.Protobuf.Collections;
 
 namespace EonetViewer.Api.Extensions;
 
 public static class EventServiceExtensions
 {
-    public static EventsQuery FromProto(this Protos.EventsRequest request)
-    {
-        return new EventsQuery(
+    public static EventsQuery FromProto(this Protos.EventsRequest request) =>
+        new EventsQuery(
             Sources: request.Sources,
             Categories: request.Categories,
             Status: request.Status.FromProto(),
@@ -28,7 +26,6 @@ public static class EventServiceExtensions
                 MaxLatitude: request.BoundingBox.MaxLatitude
             )
         );
-    }
 
     public static EventStatusFilter FromProto(this Protos.EventStatus status) => status switch
     {
@@ -40,32 +37,44 @@ public static class EventServiceExtensions
 
     public static Protos.EventsResponse ToProto(this EventsResponse response)
     {
-        var result = new Protos.EventsResponse();
-        result.Events.AddRange(response.Events.Select(e => e.ToProto()));
+        var proto = new Protos.EventsResponse();
+        proto.Events.AddRange(response.Events.Select(e => e.ToProto()));
 
-        return result;
+        return proto;
     }
 
     public static Protos.Event ToProto(this Event response)
     {
-        var result = new Protos.Event {
-            Id = response.Id,
-            Title = response.Title,
-            Description = response.Description,
-            Link = response.Link,
-            ClosedDate = response.ClosedDate?.UtcDateTime.ToTimestamp(),
-            ClosedDateOffsetMinutes = response.ClosedDate?.TotalOffsetMinutes ?? 0,
-        };
+        var proto = new Protos.Event();
 
-        result.Categories.AddRange(response.Categories.Select(c => c.ToProto()));
-        result.Sources.AddRange(response.Sources.Select(s => s.ToProto()));
+        proto.Id = response.Id;
+        proto.Title = response.Title;
+        if (response.Description != null) proto.Description = response.Description;
+        proto.Link = response.Link;
+        if (response.ClosedDate != null)
+        {
+            proto.ClosedDate = response.ClosedDate?.UtcDateTime.ToTimestamp();
+            proto.ClosedDateOffsetMinutes = response.ClosedDate?.TotalOffsetMinutes ?? 0;
+        }
 
-        return result;
+        proto.Categories.AddRange(response.Categories.Select(c => c.ToProto()));
+        proto.Sources.AddRange(response.Sources.Select(s => s.ToProto()));
+        proto.Geometries.AddRange(response.Geometry.Select(g => g.ToProto()));
+
+        return proto;
     }
 
-    public static Protos.EventCategory ToProto(this EventCategory c) => new() { Id = c.Id, Title = c.Title };
+    public static Protos.EventCategory ToProto(this EventCategory c) => new()
+    {
+        Id = c.Id,
+        Title = c.Title
+    };
 
-    public static Protos.EventSource ToProto(this EventSource s) => new() { Id = s.Id, Url = s.Url };
+    public static Protos.EventSource ToProto(this EventSource s) => new()
+    {
+        Id = s.Id,
+        Url = s.Url
+    };
 
     public static Protos.EventGeometry ToProto(this EventGeometry g) => new()
     {
@@ -73,6 +82,6 @@ public static class EventServiceExtensions
         Type = g.Type,
         Coordinates = new() { Latitude = g.Coordinates.Latitude, Longitude = g.Coordinates.Longitude },
         MagnitudeUnit = g.MagnitudeUnit,
-        // MagnitudeValue = g.MagnitudeValue
+        MagnitudeValue = g.MagnitudeValue
     };
 }

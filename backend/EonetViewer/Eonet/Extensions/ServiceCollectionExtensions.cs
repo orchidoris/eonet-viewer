@@ -9,7 +9,7 @@ namespace Eonet;
 
 public static class ServiceCollectionExtensions
 {
-    public static IServiceCollection AddEonetClients(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection AddEonet(this IServiceCollection services, IConfiguration configuration)
     {
         services.Configure<EonetClientOptions>(configuration.GetSection(nameof(EonetClientOptions)));
         services.AddRefitClient<IEonetClient>(new()
