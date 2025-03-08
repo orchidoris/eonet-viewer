@@ -16,4 +16,11 @@
     <PackageReference Include="Refit.HttpClientFactory" Version="8.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <!-- Make assembly usable for Moq, so Moq an other test code is able to instanciate objects of 'internal' classes -->
+    <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
+      <_Parameter1>DynamicProxyGenAssembly2</_Parameter1>
+    </AssemblyAttribute>
+  </ItemGroup>
+
 </Project>

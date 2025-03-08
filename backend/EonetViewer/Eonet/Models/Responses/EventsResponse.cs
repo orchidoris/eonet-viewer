@@ -1,15 +1,15 @@
 ﻿namespace Eonet;
 
 /// <summary>
-/// Response containing natural events from the EONET API.
+/// Response containing natural events from the EONET API according to the request filters.
 /// </summary>
-/// <param name="Title">Title of the response, typically "EONET Events".</param>
+/// <param name="Events">Events in the EONET system matching request filters.</param>
+/// <param name="Title">The title of the response, typically "EONET Events".</param>
 /// <param name="Description">Description of the response, typically "Natural events from EONET".</param>
-/// <param name="Link">The full link to the EONET API endpoint for this specific resource.</param>
-/// <param name="Events">A list of natural events.</param>
+/// <param name="Url">Full url to the EONET events endpoint.</param>
 public record EventsResponse(
-    string Title,
-    string Description,
-    string Link,
-    IList<Event> Events
-);
+    IReadOnlyList<Event> Events,
+    string Title = "",
+    string Description = "",
+    string Url = "")
+    : Response(Title, Description, Url);

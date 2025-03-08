@@ -1,12 +1,13 @@
-import { ErrorBoundaryPage, EventsPage, Root } from './pages';
+import { ErrorBoundaryPage, EventsPage } from './pages';
 
+import { App } from './App';
 import { createBrowserRouter } from 'react-router-dom';
 
 export const Routes = createBrowserRouter(
   [
     {
       path: '/',
-      element: <Root />,
+      element: <App />,
       errorElement: <ErrorBoundaryPage />,
       children: [
         {

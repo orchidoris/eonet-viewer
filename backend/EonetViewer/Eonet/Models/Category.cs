@@ -1,23 +1,43 @@
-﻿namespace Eonet;
+﻿using System.Text.Json.Serialization;
+
+namespace Eonet;
 
 /// <summary>
 /// Represents a category in the system.
 /// </summary>
-public record Category
+/// <param name="Id">Unique id for this category.</param>
+/// <param name="Title">Title of the category.</param>
+/// <param name="Description">Description of the category; addressing the scope.</param>
+/// <param name="Url">Full url to this category.</param>
+/// <param name="LayersUrl">Full url to layers filtered by this category.</param>
+public record Category(
+    string Id,
+    string Title,
+    string Description = "",
+    [property: JsonPropertyName("link")]
+    string Url = "",
+    [property: JsonPropertyName("layers")]
+    string LayersUrl = "");
+
+/// <summary>
+/// Represents a category in the system with mapping to layers available for it.
+/// </summary>
+/// <param name="Id">Unique id for this category.</param>
+/// <param name="Title">Title of the category.</param>
+/// <param name="Description">Description of the category; addressing the scope.</param>
+/// <param name="Url">Full url to this category.</param>
+/// <param name="LayersUrl">Full url to layers filtered by this category.</param>
+/// <param name="Layers">Ids of all layers available for this category.</param>
+public record CategoryWithLayers(
+    string Id,
+    string Title,
+    IReadOnlyList<string> Layers,
+    string Description = "",
+    string Url = "",
+    string LayersUrl = "")
+    : Category(Id, Title, Description, Url, LayersUrl)
 {
-    /// <summary> Unique id for this category. </summary>
-    public string Id { get; init; } = string.Empty;
-
-    /// <summary> The title of the category. </summary>
-    public string Title { get; init; } = string.Empty;
-
-    /// <summary> Longer description of the category, addressing the scope. </summary>
-    public string Description { get; init; } = string.Empty;
-
-    /// <summary> Full link to the API endpoint for this specific category. </summary>
-    public string Link { get; init; } = string.Empty;
-
-    /// <summary> Service endpoint that points to the Layers API endpoint filtered to return only layers from this category. </summary>
-    public string Layers { get; init; } = string.Empty;
-}
-
+    public CategoryWithLayers(Category category, IReadOnlyList<string> layers)
+        : this(category.Id, category.Title, layers, category.Description, category.Url, category.LayersUrl)
+    { }
+};

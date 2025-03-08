@@ -1,39 +1,26 @@
 ﻿namespace Eonet;
 
 /// <summary>
-/// Represents the response containing a list of web service layers in the EONET system.
+/// Response containing a list of web service layers in the EONET system.
 /// </summary>
-public record LayersResponse
-{
-    /// <summary>
-    /// The title of the response, typically "EONET Web Service Layers".
-    /// </summary>
-    public string Title { get; init; } = string.Empty;
-
-    /// <summary>
-    /// A description of the response, typically "List of web service layers in the EONET system".
-    /// </summary>
-    public string Description { get; init; } = string.Empty;
-
-    /// <summary>
-    /// The full link to the API endpoint for this specific resource.
-    /// </summary>
-    public string Link { get; init; } = string.Empty;
-
-    /// <summary>
-    /// A list of categories, each containing layers related to EONET events.
-    /// </summary>
-    public IList<LayerCategory> Categories { get; init; } = [];
-}
+/// <param name="Categories">Event layers in the EONET system matching request filters.</param>
+/// <param name="Title">Title of the response, typically "EONET Web Service Layers".</param>
+/// <param name="Description">Description of the response, typically "List of web service layers in the EONET system".</param>
+/// <param name="Url">Full url to the EONET layers endpoint.</param>
+public record LayersResponse(
+    IReadOnlyList<CategoryLayers> Categories,
+    string Title = "",
+    string Description = "",
+    string Url = "")
+    : Response(Title, Description, Url);
 
 /// <summary>
 /// Represents a category of layers within the EONET system.
 /// </summary>
-public record LayerCategory
-{
-    /// <summary>
-    /// A list of layers related to a particular category.
-    /// </summary>
-    public IList<Layer> Layers { get; init; } = [];
-}
-
+/// <param name="Id">Id of a category.</param>
+/// <param name="Title">Title of a category</param>
+/// <param name="Layers">List of layers available for a category.</param>
+public record CategoryLayers(
+    IReadOnlyList<Layer> Layers,
+    int Id = default,
+    string Title = "");

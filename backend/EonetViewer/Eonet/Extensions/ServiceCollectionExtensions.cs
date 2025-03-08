@@ -16,7 +16,12 @@ public static class ServiceCollectionExtensions
             {
                 ContentSerializer = new SystemTextJsonContentSerializer(new()
                 {
-                    Converters = { new PositionConverter() },
+                    Converters =
+                    {
+                        new EventGeometryConverter(),
+                        new PositionConverter(),
+                        new LineStringEnumerableConverter(),
+                    },
                     PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
                     PropertyNameCaseInsensitive = true,
                 }),

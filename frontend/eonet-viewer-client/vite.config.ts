@@ -43,6 +43,9 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),
+      // temporary measure to address perfomance issue with @tabler/icons-react
+      // https://github.com/tabler/tabler-icons/issues/1233#issuecomment-2428245119
+      '@tabler/icons-react': '@tabler/icons-react/dist/esm/icons/index.mjs',
     },
   },
   server: {

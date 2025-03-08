@@ -1,0 +1,19 @@
+.main {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding-top: var(--docs-header-height);
+
+  @mixin light {
+    background-color: var(--mantine-color-white);
+  }
+
+  @mixin dark {
+    background-color: var(--mantine-color-dark-7);
+  }
+
+  @media (max-width: $docs-navbar-breakpoint) {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}

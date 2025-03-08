@@ -12,7 +12,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file events_service.proto.
  */
 export const file_events_service: GenFile = /*@__PURE__*/
-  fileDesc("ChRldmVudHNfc2VydmljZS5wcm90bxIGZXZlbnRzIoMDCg1FdmVudHNSZXF1ZXN0Eg8KB3NvdXJjZXMYASADKAkSEgoKY2F0ZWdvcmllcxgCIAMoCRIjCgZzdGF0dXMYAyABKA4yEy5ldmVudHMuRXZlbnRTdGF0dXMSEgoFbGltaXQYBCABKAVIAIgBARIRCgRkYXlzGAUgASgFSAGIAQESLgoFc3RhcnQYBiABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wSAKIAQESLAoDZW5kGAcgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcEgDiAEBEi8KCW1hZ25pdHVkZRgIIAEoCzIXLmV2ZW50cy5NYWduaXR1ZGVGaWx0ZXJIBIgBARIuCgxib3VuZGluZ19ib3gYCSABKAsyEy5ldmVudHMuQm91bmRpbmdCb3hIBYgBAUIICgZfbGltaXRCBwoFX2RheXNCCAoGX3N0YXJ0QgYKBF9lbmRCDAoKX21hZ25pdHVkZUIPCg1fYm91bmRpbmdfYm94IlEKD01hZ25pdHVkZUZpbHRlchIKCgJpZBgBIAEoCRIQCgNtaW4YAiABKAFIAIgBARIQCgNtYXgYAyABKAFIAYgBAUIGCgRfbWluQgYKBF9tYXgiZwoLQm91bmRpbmdCb3gSFQoNbWluX2xvbmdpdHVkZRgBIAEoARIUCgxtYXhfbGF0aXR1ZGUYAiABKAESFQoNbWF4X2xvbmdpdHVkZRgDIAEoARIUCgxtaW5fbGF0aXR1ZGUYBCABKAEiLwoORXZlbnRzUmVzcG9uc2USHQoGZXZlbnRzGAEgAygLMg0uZXZlbnRzLkV2ZW50IuQCCgVFdmVudBIKCgJpZBgBIAEoCRINCgV0aXRsZRgCIAEoCRIYCgtkZXNjcmlwdGlvbhgDIAEoCUgAiAEBEgwKBGxpbmsYBCABKAkSNAoLY2xvc2VkX2RhdGUYBSABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wSAGIAQESJwoaY2xvc2VkX2RhdGVfb2Zmc2V0X21pbnV0ZXMYBiABKAVIAogBARIpCgpjYXRlZ29yaWVzGAcgAygLMhUuZXZlbnRzLkV2ZW50Q2F0ZWdvcnkSJAoHc291cmNlcxgIIAMoCzITLmV2ZW50cy5FdmVudFNvdXJjZRIpCgpnZW9tZXRyaWVzGAkgAygLMhUuZXZlbnRzLkV2ZW50R2VvbWV0cnlCDgoMX2Rlc2NyaXB0aW9uQg4KDF9jbG9zZWRfZGF0ZUIdChtfY2xvc2VkX2RhdGVfb2Zmc2V0X21pbnV0ZXMiKgoNRXZlbnRDYXRlZ29yeRIKCgJpZBgBIAEoCRINCgV0aXRsZRgCIAEoCSImCgtFdmVudFNvdXJjZRIKCgJpZBgBIAEoCRILCgN1cmwYAiABKAkijgIKDUV2ZW50R2VvbWV0cnkSKAoEZGF0ZRgBIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASGwoTZGF0ZV9vZmZzZXRfbWludXRlcxgCIAEoBRIMCgR0eXBlGAMgASgJEigKC2Nvb3JkaW5hdGVzGAQgASgLMhMuZXZlbnRzLkNvb3JkaW5hdGVzEhsKDm1hZ25pdHVkZV91bml0GAUgASgJSACIAQESOgoPbWFnbml0dWRlX3ZhbHVlGAYgASgLMhwuZ29vZ2xlLnByb3RvYnVmLkRvdWJsZVZhbHVlSAGIAQFCEQoPX21hZ25pdHVkZV91bml0QhIKEF9tYWduaXR1ZGVfdmFsdWUiMgoLQ29vcmRpbmF0ZXMSEAoIbGF0aXR1ZGUYASABKAESEQoJbG9uZ2l0dWRlGAIgASgBKiwKC0V2ZW50U3RhdHVzEggKBE9QRU4QABIKCgZDTE9TRUQQARIHCgNBTEwQAjJLCg1FdmVudHNTZXJ2aWNlEjoKCUdldEV2ZW50cxIVLmV2ZW50cy5FdmVudHNSZXF1ZXN0GhYuZXZlbnRzLkV2ZW50c1Jlc3BvbnNlQhmqAhZFb25ldFZpZXdlci5BcGkuUHJvdG9zYgZwcm90bzM", [file_google_protobuf_timestamp, file_google_protobuf_wrappers]);
+  fileDesc("ChRldmVudHNfc2VydmljZS5wcm90bxIGZXZlbnRzIoMDCg1FdmVudHNSZXF1ZXN0Eg8KB3NvdXJjZXMYASADKAkSEgoKY2F0ZWdvcmllcxgCIAMoCRIjCgZzdGF0dXMYAyABKA4yEy5ldmVudHMuRXZlbnRTdGF0dXMSEgoFbGltaXQYBCABKAVIAIgBARIRCgRkYXlzGAUgASgFSAGIAQESLgoFc3RhcnQYBiABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wSAKIAQESLAoDZW5kGAcgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcEgDiAEBEi8KCW1hZ25pdHVkZRgIIAEoCzIXLmV2ZW50cy5NYWduaXR1ZGVGaWx0ZXJIBIgBARIuCgxib3VuZGluZ19ib3gYCSABKAsyEy5ldmVudHMuQm91bmRpbmdCb3hIBYgBAUIICgZfbGltaXRCBwoFX2RheXNCCAoGX3N0YXJ0QgYKBF9lbmRCDAoKX21hZ25pdHVkZUIPCg1fYm91bmRpbmdfYm94IjwKDkV2ZW50c1Jlc3BvbnNlEh0KBmV2ZW50cxgBIAMoCzINLmV2ZW50cy5FdmVudBILCgN1cmwYAiABKAkiFgoURXZlbnRzQ29udGV4dFJlcXVlc3QipAEKFUV2ZW50c0NvbnRleHRSZXNwb25zZRIkCgpjYXRlZ29yaWVzGAEgAygLMhAuZXZlbnRzLkNhdGVnb3J5Eh0KBmxheWVycxgCIAMoCzINLmV2ZW50cy5MYXllchIfCgdzb3VyY2VzGAMgAygLMg4uZXZlbnRzLlNvdXJjZRIlCgptYWduaXR1ZGVzGAQgAygLMhEuZXZlbnRzLk1hZ25pdHVkZSJRCg9NYWduaXR1ZGVGaWx0ZXISCgoCaWQYASABKAkSEAoDbWluGAIgASgBSACIAQESEAoDbWF4GAMgASgBSAGIAQFCBgoEX21pbkIGCgRfbWF4ImcKC0JvdW5kaW5nQm94EhUKDW1pbl9sb25naXR1ZGUYASABKAESFAoMbWF4X2xhdGl0dWRlGAIgASgBEhUKDW1heF9sb25naXR1ZGUYAyABKAESFAoMbWluX2xhdGl0dWRlGAQgASgBIpsCCgVFdmVudBIKCgJpZBgBIAEoCRINCgV0aXRsZRgCIAEoCRIYCgtkZXNjcmlwdGlvbhgDIAEoCUgAiAEBEgsKA3VybBgEIAEoCRI0CgtjbG9zZWRfZGF0ZRgFIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBIAYgBARIpCgpjYXRlZ29yaWVzGAcgAygLMhUuZXZlbnRzLkV2ZW50Q2F0ZWdvcnkSJAoHc291cmNlcxgIIAMoCzITLmV2ZW50cy5FdmVudFNvdXJjZRIpCgpnZW9tZXRyaWVzGAkgAygLMhUuZXZlbnRzLkV2ZW50R2VvbWV0cnlCDgoMX2Rlc2NyaXB0aW9uQg4KDF9jbG9zZWRfZGF0ZSIqCg1FdmVudENhdGVnb3J5EgoKAmlkGAEgASgJEg0KBXRpdGxlGAIgASgJIjMKC0V2ZW50U291cmNlEgoKAmlkGAEgASgJEhgKEGV2ZW50X3NvdXJjZV91cmwYAiABKAkiuwIKDUV2ZW50R2VvbWV0cnkSKAoEZGF0ZRgBIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASJwoEdHlwZRgDIAEoDjIZLmV2ZW50cy5FdmVudEdlb21ldHJ5VHlwZRInCgVwb2ludBgEIAEoCzITLmV2ZW50cy5Db29yZGluYXRlc0gAiAEBEiQKB3BvbHlnb24YBSADKAsyEy5ldmVudHMuUG9seWdvbkxpbmUSGwoObWFnbml0dWRlX3VuaXQYBiABKAlIAYgBARI6Cg9tYWduaXR1ZGVfdmFsdWUYByABKAsyHC5nb29nbGUucHJvdG9idWYuRG91YmxlVmFsdWVIAogBAUIICgZfcG9pbnRCEQoPX21hZ25pdHVkZV91bml0QhIKEF9tYWduaXR1ZGVfdmFsdWUiMAoLUG9seWdvbkxpbmUSIQoEbGluZRgBIAMoCzITLmV2ZW50cy5Db29yZGluYXRlcyJWCgtDb29yZGluYXRlcxIQCghsYXRpdHVkZRgBIAEoARIRCglsb25naXR1ZGUYAiABKAESFQoIYWx0aXR1ZGUYAyABKAFIAIgBAUILCglfYWx0aXR1ZGUiawoIQ2F0ZWdvcnkSCgoCaWQYASABKAkSDQoFdGl0bGUYAiABKAkSEwoLZGVzY3JpcHRpb24YAyABKAkSCwoDdXJsGAQgASgJEhIKCmxheWVyc191cmwYBSABKAkSDgoGbGF5ZXJzGAYgAygJIqcBCgVMYXllchIKCgJpZBgBIAEoCRITCgtzZXJ2aWNlX3VybBgCIAEoCRIXCg9zZXJ2aWNlX3R5cGVfaWQYAyABKAkSEwoGZm9ybWF0GAQgASgJSACIAQESHAoPdGlsZV9tYXRyaXhfc2V0GAUgASgJSAGIAQESEgoKY2F0ZWdvcmllcxgGIAMoCUIJCgdfZm9ybWF0QhIKEF90aWxlX21hdHJpeF9zZXQiSwoGU291cmNlEgoKAmlkGAEgASgJEg0KBXRpdGxlGAIgASgJEhIKCnNvdXJjZV91cmwYAyABKAkSEgoKZXZlbnRzX3VybBgEIAEoCSJdCglNYWduaXR1ZGUSCgoCaWQYASABKAkSDQoFdGl0bGUYAiABKAkSDAoEdW5pdBgDIAEoCRITCgtkZXNjcmlwdGlvbhgEIAEoCRISCgpldmVudHNfdXJsGAUgASgJKiwKC0V2ZW50U3RhdHVzEggKBE9QRU4QABIKCgZDTE9TRUQQARIHCgNBTEwQAiorChFFdmVudEdlb21ldHJ5VHlwZRIJCgVQT0lOVBAAEgsKB1BPTFlHT04QATKcAQoNRXZlbnRzU2VydmljZRI6CglHZXRFdmVudHMSFS5ldmVudHMuRXZlbnRzUmVxdWVzdBoWLmV2ZW50cy5FdmVudHNSZXNwb25zZRJPChBHZXRFdmVudHNDb250ZXh0EhwuZXZlbnRzLkV2ZW50c0NvbnRleHRSZXF1ZXN0Gh0uZXZlbnRzLkV2ZW50c0NvbnRleHRSZXNwb25zZUIZqgIWRW9uZXRWaWV3ZXIuQXBpLlByb3Rvc2IGcHJvdG8z", [file_google_protobuf_timestamp, file_google_protobuf_wrappers]);
 
 /**
  * Represents filters for querying events from the EONET API.
@@ -92,6 +92,79 @@ export const EventsRequestSchema: GenMessage<EventsRequest> = /*@__PURE__*/
   messageDesc(file_events_service, 0);
 
 /**
+ * Response containing natural events.
+ *
+ * @generated from message events.EventsResponse
+ */
+export type EventsResponse = Message<"events.EventsResponse"> & {
+  /**
+   * A list of natural events.
+   *
+   * @generated from field: repeated events.Event events = 1;
+   */
+  events: Event[];
+
+  /**
+   * A url used to retrieve the data from EONET.
+   *
+   * @generated from field: string url = 2;
+   */
+  url: string;
+};
+
+/**
+ * Describes the message events.EventsResponse.
+ * Use `create(EventsResponseSchema)` to create a new message.
+ */
+export const EventsResponseSchema: GenMessage<EventsResponse> = /*@__PURE__*/
+  messageDesc(file_events_service, 1);
+
+/**
+ * @generated from message events.EventsContextRequest
+ */
+export type EventsContextRequest = Message<"events.EventsContextRequest"> & {
+};
+
+/**
+ * Describes the message events.EventsContextRequest.
+ * Use `create(EventsContextRequestSchema)` to create a new message.
+ */
+export const EventsContextRequestSchema: GenMessage<EventsContextRequest> = /*@__PURE__*/
+  messageDesc(file_events_service, 2);
+
+/**
+ * @generated from message events.EventsContextResponse
+ */
+export type EventsContextResponse = Message<"events.EventsContextResponse"> & {
+  /**
+   * @generated from field: repeated events.Category categories = 1;
+   */
+  categories: Category[];
+
+  /**
+   * @generated from field: repeated events.Layer layers = 2;
+   */
+  layers: Layer[];
+
+  /**
+   * @generated from field: repeated events.Source sources = 3;
+   */
+  sources: Source[];
+
+  /**
+   * @generated from field: repeated events.Magnitude magnitudes = 4;
+   */
+  magnitudes: Magnitude[];
+};
+
+/**
+ * Describes the message events.EventsContextResponse.
+ * Use `create(EventsContextResponseSchema)` to create a new message.
+ */
+export const EventsContextResponseSchema: GenMessage<EventsContextResponse> = /*@__PURE__*/
+  messageDesc(file_events_service, 3);
+
+/**
  * Ceiling, floor, or range of magnitude values for the events to fall between (inclusive).
  *
  * @generated from message events.MagnitudeFilter
@@ -124,7 +197,7 @@ export type MagnitudeFilter = Message<"events.MagnitudeFilter"> & {
  * Use `create(MagnitudeFilterSchema)` to create a new message.
  */
 export const MagnitudeFilterSchema: GenMessage<MagnitudeFilter> = /*@__PURE__*/
-  messageDesc(file_events_service, 1);
+  messageDesc(file_events_service, 4);
 
 /**
  * Bounding box to filter events by coordinates.
@@ -166,28 +239,7 @@ export type BoundingBox = Message<"events.BoundingBox"> & {
  * Use `create(BoundingBoxSchema)` to create a new message.
  */
 export const BoundingBoxSchema: GenMessage<BoundingBox> = /*@__PURE__*/
-  messageDesc(file_events_service, 2);
-
-/**
- * Response containing natural events.
- *
- * @generated from message events.EventsResponse
- */
-export type EventsResponse = Message<"events.EventsResponse"> & {
-  /**
-   * A list of natural events.
-   *
-   * @generated from field: repeated events.Event events = 1;
-   */
-  events: Event[];
-};
-
-/**
- * Describes the message events.EventsResponse.
- * Use `create(EventsResponseSchema)` to create a new message.
- */
-export const EventsResponseSchema: GenMessage<EventsResponse> = /*@__PURE__*/
-  messageDesc(file_events_service, 3);
+  messageDesc(file_events_service, 5);
 
 /**
  * Natural event.
@@ -217,11 +269,11 @@ export type Event = Message<"events.Event"> & {
   description?: string;
 
   /**
-   * Full link to the API endpoint for this specific event.
+   * Full url to the API endpoint for this specific event.
    *
-   * @generated from field: string link = 4;
+   * @generated from field: string url = 4;
    */
-  link: string;
+  url: string;
 
   /**
    * Event is deemed �closed� when it has ended. The closed field will include a date/time when the event has ended. Depending upon the nature of the event, the closed value may or may not accurately represent the absolute ending of the event. If the event is open, this will show �null�.
@@ -229,13 +281,6 @@ export type Event = Message<"events.Event"> & {
    * @generated from field: optional google.protobuf.Timestamp closed_date = 5;
    */
   closedDate?: Timestamp;
-
-  /**
-   * Offset for the closed_date field, usually 0 unless the source provided a particular offset.
-   *
-   * @generated from field: optional int32 closed_date_offset_minutes = 6;
-   */
-  closedDateOffsetMinutes?: number;
 
   /**
    * One or more categories assigned to the event.
@@ -264,7 +309,7 @@ export type Event = Message<"events.Event"> & {
  * Use `create(EventSchema)` to create a new message.
  */
 export const EventSchema: GenMessage<Event> = /*@__PURE__*/
-  messageDesc(file_events_service, 4);
+  messageDesc(file_events_service, 6);
 
 /**
  * Mapping from a natural event to a category.
@@ -292,7 +337,7 @@ export type EventCategory = Message<"events.EventCategory"> & {
  * Use `create(EventCategorySchema)` to create a new message.
  */
 export const EventCategorySchema: GenMessage<EventCategory> = /*@__PURE__*/
-  messageDesc(file_events_service, 5);
+  messageDesc(file_events_service, 7);
 
 /**
  * Mapping from a natural event to a source.
@@ -310,9 +355,9 @@ export type EventSource = Message<"events.EventSource"> & {
   /**
    * Url of this specific event in the original source.
    *
-   * @generated from field: string url = 2;
+   * @generated from field: string event_source_url = 2;
    */
-  url: string;
+  eventSourceUrl: string;
 };
 
 /**
@@ -320,7 +365,7 @@ export type EventSource = Message<"events.EventSource"> & {
  * Use `create(EventSourceSchema)` to create a new message.
  */
 export const EventSourceSchema: GenMessage<EventSource> = /*@__PURE__*/
-  messageDesc(file_events_service, 6);
+  messageDesc(file_events_service, 8);
 
 /**
  * Geometry of a natural event.
@@ -336,37 +381,37 @@ export type EventGeometry = Message<"events.EventGeometry"> & {
   date?: Timestamp;
 
   /**
-   * Offset for the date field, usually 0 unless the source provided a particular offset.
+   * Type of geometry, Point or Polygon.
    *
-   * @generated from field: int32 date_offset_minutes = 2;
+   * @generated from field: events.EventGeometryType type = 3;
    */
-  dateOffsetMinutes: number;
+  type: EventGeometryType;
 
   /**
-   * Type of geometry, usually "Point" but "Polygon" is possible.
+   * Event point coordinates, available only for Point type.
    *
-   * @generated from field: string type = 3;
+   * @generated from field: optional events.Coordinates point = 4;
    */
-  type: string;
+  point?: Coordinates;
 
   /**
-   * Coordinates of the event.
+   * Event polygon coordinates, available only for Polygon type.
    *
-   * @generated from field: events.Coordinates coordinates = 4;
+   * @generated from field: repeated events.PolygonLine polygon = 5;
    */
-  coordinates?: Coordinates;
+  polygon: PolygonLine[];
 
   /**
    * Unit of the magnitude value.
    *
-   * @generated from field: optional string magnitude_unit = 5;
+   * @generated from field: optional string magnitude_unit = 6;
    */
   magnitudeUnit?: string;
 
   /**
    * Magnitude value of the event.
    *
-   * @generated from field: optional google.protobuf.DoubleValue magnitude_value = 6;
+   * @generated from field: optional google.protobuf.DoubleValue magnitude_value = 7;
    */
   magnitudeValue?: number;
 };
@@ -376,7 +421,28 @@ export type EventGeometry = Message<"events.EventGeometry"> & {
  * Use `create(EventGeometrySchema)` to create a new message.
  */
 export const EventGeometrySchema: GenMessage<EventGeometry> = /*@__PURE__*/
-  messageDesc(file_events_service, 7);
+  messageDesc(file_events_service, 9);
+
+/**
+ * Closed line representing polygon limits.
+ *
+ * @generated from message events.PolygonLine
+ */
+export type PolygonLine = Message<"events.PolygonLine"> & {
+  /**
+   * Coordinates of the polygon line.
+   *
+   * @generated from field: repeated events.Coordinates line = 1;
+   */
+  line: Coordinates[];
+};
+
+/**
+ * Describes the message events.PolygonLine.
+ * Use `create(PolygonLineSchema)` to create a new message.
+ */
+export const PolygonLineSchema: GenMessage<PolygonLine> = /*@__PURE__*/
+  messageDesc(file_events_service, 10);
 
 /**
  * Position of event geometry
@@ -397,6 +463,13 @@ export type Coordinates = Message<"events.Coordinates"> & {
    * @generated from field: double longitude = 2;
    */
   longitude: number;
+
+  /**
+   * Altitude of the position.
+   *
+   * @generated from field: optional double altitude = 3;
+   */
+  altitude?: number;
 };
 
 /**
@@ -404,7 +477,160 @@ export type Coordinates = Message<"events.Coordinates"> & {
  * Use `create(CoordinatesSchema)` to create a new message.
  */
 export const CoordinatesSchema: GenMessage<Coordinates> = /*@__PURE__*/
-  messageDesc(file_events_service, 8);
+  messageDesc(file_events_service, 11);
+
+/**
+ * @generated from message events.Category
+ */
+export type Category = Message<"events.Category"> & {
+  /**
+   * @generated from field: string id = 1;
+   */
+  id: string;
+
+  /**
+   * @generated from field: string title = 2;
+   */
+  title: string;
+
+  /**
+   * @generated from field: string description = 3;
+   */
+  description: string;
+
+  /**
+   * @generated from field: string url = 4;
+   */
+  url: string;
+
+  /**
+   * @generated from field: string layers_url = 5;
+   */
+  layersUrl: string;
+
+  /**
+   * @generated from field: repeated string layers = 6;
+   */
+  layers: string[];
+};
+
+/**
+ * Describes the message events.Category.
+ * Use `create(CategorySchema)` to create a new message.
+ */
+export const CategorySchema: GenMessage<Category> = /*@__PURE__*/
+  messageDesc(file_events_service, 12);
+
+/**
+ * @generated from message events.Layer
+ */
+export type Layer = Message<"events.Layer"> & {
+  /**
+   * @generated from field: string id = 1;
+   */
+  id: string;
+
+  /**
+   * @generated from field: string service_url = 2;
+   */
+  serviceUrl: string;
+
+  /**
+   * @generated from field: string service_type_id = 3;
+   */
+  serviceTypeId: string;
+
+  /**
+   * @generated from field: optional string format = 4;
+   */
+  format?: string;
+
+  /**
+   * @generated from field: optional string tile_matrix_set = 5;
+   */
+  tileMatrixSet?: string;
+
+  /**
+   * @generated from field: repeated string categories = 6;
+   */
+  categories: string[];
+};
+
+/**
+ * Describes the message events.Layer.
+ * Use `create(LayerSchema)` to create a new message.
+ */
+export const LayerSchema: GenMessage<Layer> = /*@__PURE__*/
+  messageDesc(file_events_service, 13);
+
+/**
+ * @generated from message events.Source
+ */
+export type Source = Message<"events.Source"> & {
+  /**
+   * @generated from field: string id = 1;
+   */
+  id: string;
+
+  /**
+   * @generated from field: string title = 2;
+   */
+  title: string;
+
+  /**
+   * @generated from field: string source_url = 3;
+   */
+  sourceUrl: string;
+
+  /**
+   * @generated from field: string events_url = 4;
+   */
+  eventsUrl: string;
+};
+
+/**
+ * Describes the message events.Source.
+ * Use `create(SourceSchema)` to create a new message.
+ */
+export const SourceSchema: GenMessage<Source> = /*@__PURE__*/
+  messageDesc(file_events_service, 14);
+
+/**
+ * @generated from message events.Magnitude
+ */
+export type Magnitude = Message<"events.Magnitude"> & {
+  /**
+   * @generated from field: string id = 1;
+   */
+  id: string;
+
+  /**
+   * @generated from field: string title = 2;
+   */
+  title: string;
+
+  /**
+   * @generated from field: string unit = 3;
+   */
+  unit: string;
+
+  /**
+   * @generated from field: string description = 4;
+   */
+  description: string;
+
+  /**
+   * @generated from field: string events_url = 5;
+   */
+  eventsUrl: string;
+};
+
+/**
+ * Describes the message events.Magnitude.
+ * Use `create(MagnitudeSchema)` to create a new message.
+ */
+export const MagnitudeSchema: GenMessage<Magnitude> = /*@__PURE__*/
+  messageDesc(file_events_service, 15);
 
 /**
  * Filter based on events having a closed date.
@@ -441,6 +667,33 @@ export const EventStatusSchema: GenEnum<EventStatus> = /*@__PURE__*/
   enumDesc(file_events_service, 0);
 
 /**
+ * Event geometry types.
+ *
+ * @generated from enum events.EventGeometryType
+ */
+export enum EventGeometryType {
+  /**
+   * Point geometry type.
+   *
+   * @generated from enum value: POINT = 0;
+   */
+  POINT = 0,
+
+  /**
+   * Polygon geometry type.
+   *
+   * @generated from enum value: POLYGON = 1;
+   */
+  POLYGON = 1,
+}
+
+/**
+ * Describes the enum events.EventGeometryType.
+ */
+export const EventGeometryTypeSchema: GenEnum<EventGeometryType> = /*@__PURE__*/
+  enumDesc(file_events_service, 1);
+
+/**
  * The events service definition.
  *
  * @generated from service events.EventsService
@@ -455,6 +708,14 @@ export const EventsService: GenService<{
     methodKind: "unary";
     input: typeof EventsRequestSchema;
     output: typeof EventsResponseSchema;
+  },
+  /**
+   * @generated from rpc events.EventsService.GetEventsContext
+   */
+  getEventsContext: {
+    methodKind: "unary";
+    input: typeof EventsContextRequestSchema;
+    output: typeof EventsContextResponseSchema;
   },
 }> = /*@__PURE__*/
   serviceDesc(file_events_service, 0);

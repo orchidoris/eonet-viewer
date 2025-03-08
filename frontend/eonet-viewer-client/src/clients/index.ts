@@ -1,1 +1,2 @@
-export * from './grpc/events_service_pb';
+export * from './grpc-overrides';
+export * from './EventsClient';

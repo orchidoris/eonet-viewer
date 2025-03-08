@@ -1,38 +1,54 @@
-import { EventsService } from '../clients/grpc-generated/events_service_pb';
-import { createClient } from '@connectrpc/connect';
-import { createConnectTransport } from '@connectrpc/connect-web';
-import { env } from '../helpers/env';
+import { Card, Code, Flex, SimpleGrid, Text } from '@mantine/core';
+import { EventStatus, useGetEvents } from '../clients';
+
+import { EventCategoryIcon } from '../components/EventCategoryIcon/EventCategoryIcon';
+import { IconExternalLink } from '@tabler/icons-react';
+import { Section } from '../components';
+import classes from './EventsPage.module.css';
 import { useDocumentTitle } from '../helpers';
-import { useEffect } from 'react';
-
-// Import service definition that you want to connect to.
-
-
-
-// The transport defines what type of endpoint we're hitting.
-// In our example we'll be communicating with a Connect endpoint.
-const transport = createConnectTransport({
-  baseUrl: env.apiBaseUrl,
-});
-
-// Here we make the client itself, combining the service
-// definition with the transport.
-const client = createClient(EventsService, transport);
+import { useEventsContext } from '../contexts';
 
 export function EventsPage() {
   useDocumentTitle('Natural Events');
+  const { sources } = useEventsContext();
+  const [events, eventsResult] = useGetEvents({
+    limit: 50,
+    status: EventStatus.CLOSED,
+    start: new Date('2000-01-04Z'),
+    end: new Date('2020-01-04Z'),
+  });
+
+  console.log(events);
+  console.log(eventsResult);
+  const isLoading = eventsResult.isFetching || eventsResult.isPending;
 
   return (
-    <form
-      onSubmit={async (e) => {
-        e.preventDefault();
-        await EventsService.method({
-          sentence: inputValue,
-        });
-      }}
-    >
-      <input value={inputValue} onChange={(e) => setInputValue(e.target.value)} />
-      <button type="submit">Send</button>
-    </form>
+    <Section isLoading={isLoading}>
+      <SimpleGrid className={classes.grid} cols={{ base: 1, xs: 2, md: 3, lg: 4, xl: 5 }} verticalSpacing="lg">
+        {events?.events.map((event) => (
+          <Card key={event.id} className={classes.card} shadow="sm" padding="lg" radius="md" withBorder>
+            <Flex className={classes.categories} gap="xs">
+              {event.categories.map((category) => (
+                <Code>{category.title}</Code>
+              ))}
+            </Flex>
+            <a href={event.sources[0].eventSourceUrl} target="_blank" title={sources[event.sources[0].id].title}>
+              <IconExternalLink className={classes.goToSource} size={14} stroke={1.2} />
+            </a>
+            <Flex className={classes.header} gap="sm">
+              <EventCategoryIcon className={classes.icon} category={event.categories[0]} />
+              <Text fw={500} lineClamp={2}>
+                {event.title}
+              </Text>
+            </Flex>
+            {event.description ? (
+              <Text size="sm" c="dimmed" mt="sm" lineClamp={3}>
+                {event.description}
+              </Text>
+            ) : undefined}
+          </Card>
+        ))}
+      </SimpleGrid>
+    </Section>
   );
 }

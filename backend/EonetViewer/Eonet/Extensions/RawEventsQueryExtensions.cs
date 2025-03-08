@@ -2,7 +2,7 @@
 
 internal static class InternalEventsQueryExtensions
 {
-    public static RawEventsQuery? ToRawQuery(this EventsQuery? query) =>
+    public static RawEventsQuery? ToRawQuery(this EventsFilters? query) =>
         query == null
         ? null
         : new RawEventsQuery(
@@ -18,6 +18,6 @@ internal static class InternalEventsQueryExtensions
             magMax: query.Magnitude?.Max,
             bbox: query.BoundingBox?.ToRawQuery());
 
-    private static IList<double> ToRawQuery(this BoundingBox bbox) =>
+    private static IReadOnlyList<double> ToRawQuery(this BoundingBox bbox) =>
         [bbox.MinLongitude, bbox.MaxLatitude, bbox.MaxLongitude, bbox.MinLatitude];
 }

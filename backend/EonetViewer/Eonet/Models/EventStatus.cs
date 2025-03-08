@@ -1,13 +1,14 @@
 ﻿namespace Eonet.Models;
 
-/// <summary>
-/// Events that have ended are assigned a closed date, and the existence of that date will allow 
-/// you to filter for only-open or only-closed events. Omitting the status parameter will return 
-/// only the currently open events (default). Using “all” will list open and closed values.
-/// </summary>
+/// <summary>Status filter based on events having closed date.</summary>
 public enum EventStatus
 {
+    /// <summary>Value matching events having no closed date.</summary>
     Open,
+
+    /// <summary>Value matching events having closed date.</summary>
     Closed,
+
+    /// <summary>Value matching all events, both open and closed ones.</summary>
     All
 }

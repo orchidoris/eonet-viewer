@@ -3,13 +3,13 @@
 /// <summary>
 /// Represents the response containing a list of event magnitudes in the EONET system.
 /// </summary>
-/// <param name="Title">The title of the response.</param>
-/// <param name="Description">The description of the response.</param>
-/// <param name="Link">The link to the response.</param>
-/// <param name="Magnitudes">The list of magnitudes in the response.</param>
+/// <param name="Magnitudes">All available event magnitudes in the EONET system.</param>
+/// <param name="Title">Title of the response, typically "EONET Event Magnitudes".</param>
+/// <param name="Description">Description of the response, typically "List of all the available event magnitudes in the EONET system".</param>
+/// <param name="Url">Full url to the EONET magnitudes endpoint.</param>
 public record MagnitudesResponse(
-    string Title,
-    string Description,
-    string Link,
-    IList<Magnitude> Magnitudes
-);
+    IReadOnlyList<Magnitude> Magnitudes,
+    string Title = "",
+    string Description = "",
+    string Url = "")
+    : Response(Title, Description, Url);

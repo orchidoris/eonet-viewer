@@ -1,0 +1,44 @@
+.header {
+  height: calc(3.75rem * var(--mantine-scale));
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--mantine-spacing-md);
+  display: flex;
+
+  @mixin light {
+    border-bottom: 1px solid var(--mantine-color-gray-2);
+  }
+
+  @mixin dark {
+    border-bottom: 1px solid var(--mantine-color-dark-8);
+  }
+}
+
+.burgerButton {
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: 0.2rem;
+  border-radius: var(--mantine-radius-sm);
+  color: var(--mantine-color-blue-light-color);
+
+  @mixin hover {
+    background-color: var(--mantine-color-blue-light-hover);
+  }
+}
+
+.brand {
+  display: flex;
+  flex-grow: 4;
+  justify-content: left;
+  align-items: center;
+}
+
+.logo {
+  margin-right: 12px;
+  height: 40px;
+}
+
+.appName {
+  font-size: 1rem;
+}
