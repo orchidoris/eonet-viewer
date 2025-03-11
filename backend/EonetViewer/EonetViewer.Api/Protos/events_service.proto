@@ -21,7 +21,7 @@ message EventsRequest {
   repeated string categories = 2; // Filter by event categories, none - means all categories.
   EventStatus status = 3; // Filter based on events having a closed date.
   optional int32 limit = 4; // Limits the number of events returned.
-  optional int32 days = 5; // Limit the number of prior days (including today) from which events will be returned.
+  optional int32 days_prior = 5; // Limit the number of the days prior (including today) from which events will be returned.
   optional google.protobuf.Timestamp start = 6; // Min date of events.
   optional google.protobuf.Timestamp end = 7; // Max date of events.
   optional MagnitudeFilter magnitude = 8; // A ceiling, floor, or range of magnitude values for the events.
@@ -90,7 +90,7 @@ message EventCategory {
 // Mapping from a natural event to a source.
 message EventSource {
 	string id = 1; // Unique source id.
-	string event_source_url = 2; // Url of this specific event in the original source.
+	string external_source_event_url = 2; // Url of this specific event in the original source.
 }
 
 // Geometry of a natural event.
@@ -136,7 +136,6 @@ message Layer {
 	string service_type_id = 3;
 	optional string format = 4;
 	optional string tile_matrix_set = 5;
-	repeated string categories = 6;
 }
 
 message Source {

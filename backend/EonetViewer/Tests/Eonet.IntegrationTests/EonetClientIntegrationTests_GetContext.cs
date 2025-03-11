@@ -17,7 +17,7 @@ public class EonetClientIntegrationTests_GetContext
 
     [TestMethod]
     [Timeout(IntegrationTestTimeout)]
-    public async Task GetContext_Success()
+    public async Task ComposesMultipleEndpointsResponses()
     {
         var contextApiResponse = await _client.GetContext();
         Assert.IsTrue(contextApiResponse.IsSuccessful);
@@ -40,7 +40,7 @@ public class EonetClientIntegrationTests_GetContext
         sources.FirstOrDefault(c => c.Id == KnownSourceId.AVO).Should().BeEquivalentTo(new Source(
             Id: KnownSourceId.AVO,
             Title: "Alaska Volcano Observatory",
-            SourceUrl: "https://www.avo.alaska.edu/",
+            ExternalHomepageUrl: "https://www.avo.alaska.edu/",
             EventsUrl: "https://eonet.gsfc.nasa.gov/api/v3/events?source=AVO"
         ));
 
@@ -55,12 +55,11 @@ public class EonetClientIntegrationTests_GetContext
 
         Assert.IsTrue(layers.Count >= MinLayersCount, $"Expected at least {MinLayersCount} layers, but {layers.Count} encountered.");
         var layer = layers.FirstOrDefault(c => c.Id == KnownLayerId.AIRS_Dust_Score_Ocean_Day);
-        layer.Should().BeEquivalentTo(new LayerWithCategories(
+        layer.Should().BeEquivalentTo(new Layer(
             Id: "AIRS_Dust_Score_Ocean_Day",
             ServiceUrl: "https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/wmts.cgi",
             ServiceTypeId: "WMTS_1_0_0",
-            Parameters: [new("image/png", "2km")],
-            Categories: ["dustHaze", "wildfires"]
+            Parameters: [new("image/png", "2km")]
         ));
     }
 }

@@ -34,13 +34,13 @@ public class EonetClientIntegrationTests_GetSources
         sources["BYU_ICE"].Should().BeEquivalentTo(new Source(
             Id: "BYU_ICE",
             Title: "Brigham Young University Antarctic Iceberg Tracking Database",
-            SourceUrl: "http://www.scp.byu.edu/data/iceberg/database1.html",
+            ExternalHomepageUrl: "http://www.scp.byu.edu/data/iceberg/database1.html",
             EventsUrl: "https://eonet.gsfc.nasa.gov/api/v3/events?source=BYU_ICE"));
 
         sources["UNISYS"].Should().BeEquivalentTo(new Source(
             Id: "UNISYS",
             Title: "Unisys Weather",
-            SourceUrl: "http://weather.unisys.com/hurricane/",
+            ExternalHomepageUrl: "http://weather.unisys.com/hurricane/",
             EventsUrl: "https://eonet.gsfc.nasa.gov/api/v3/events?source=UNISYS"));
     }
 }

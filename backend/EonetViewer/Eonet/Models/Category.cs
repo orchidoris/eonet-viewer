@@ -31,13 +31,8 @@ public record Category(
 public record CategoryWithLayers(
     string Id,
     string Title,
-    IReadOnlyList<string> Layers,
     string Description = "",
     string Url = "",
-    string LayersUrl = "")
-    : Category(Id, Title, Description, Url, LayersUrl)
-{
-    public CategoryWithLayers(Category category, IReadOnlyList<string> layers)
-        : this(category.Id, category.Title, layers, category.Description, category.Url, category.LayersUrl)
-    { }
-};
+    string LayersUrl = "",
+    IReadOnlyList<string> Layers = default!)
+    : Category(Id, Title, Description, Url, LayersUrl);

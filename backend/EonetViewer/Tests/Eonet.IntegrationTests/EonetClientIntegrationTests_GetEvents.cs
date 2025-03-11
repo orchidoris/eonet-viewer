@@ -109,9 +109,9 @@ public sealed class EonetClientIntegrationTests_GetEvents
     [DataRow(2)]
     [DataRow(8)]
     [DataRow(20)]
-    public async Task LimitsDaysInThePast_Success(int daysPrior)
+    public async Task LimitsDaysPrior_Success(int daysPrior)
     {
-        var apiResponse = await _client.GetEvents(new() { Days = daysPrior });
+        var apiResponse = await _client.GetEvents(new() { DaysPrior = daysPrior });
         Assert.AreEqual(
             $"https://eonet.gsfc.nasa.gov/api/v3/events?days={daysPrior}",
             apiResponse.GetUrl());
@@ -204,8 +204,8 @@ public sealed class EonetClientIntegrationTests_GetEvents
     public async Task FiltersByStatus_Success(EventStatusFilter? status, string expectedPath, bool hasOpen, bool hasClosed)
     {
         var apiResponse = status == null
-            ? await _client.GetEvents(new() { Days = 15 })
-            : await _client.GetEvents(new() { Status = status.Value, Days = 15 });
+            ? await _client.GetEvents(new() { DaysPrior = 15 })
+            : await _client.GetEvents(new() { Status = status.Value, DaysPrior = 15 });
 
         Assert.AreEqual(
             $"https://eonet.gsfc.nasa.gov/api/v3/events?{expectedPath}days=15",

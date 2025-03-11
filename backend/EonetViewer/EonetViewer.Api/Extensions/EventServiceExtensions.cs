@@ -12,7 +12,7 @@ public static class EventServiceExtensions
         Categories: request.Categories,
         Status: request.Status.FromProto(),
         Limit: request.HasLimit ? request.Limit : null,
-        Days: request.HasDays ? request.Days : null,
+        DaysPrior: request.HasDaysPrior ? request.DaysPrior : null,
         Start: request.Start.ToOptionalDate(),
         End: request.End.ToOptionalDate(),
         Magnitude: request.Magnitude.FromProto(),
@@ -96,7 +96,7 @@ public static class EventServiceExtensions
     public static Protos.EventSource ToProto(this EventSource source) => new()
     {
         Id = source.Id,
-        EventSourceUrl = source.EventSourceUrl
+        ExternalSourceEventUrl = source.ExternalSourceEventUrl
     };
 
     public static Protos.EventGeometry ToProto(this EventGeometry geometry)
@@ -161,7 +161,7 @@ public static class EventServiceExtensions
         return proto;
     }
 
-    public static Protos.Layer ToProto(this LayerWithCategories layer)
+    public static Protos.Layer ToProto(this Layer layer)
     {
         var proto = new Protos.Layer()
         {
@@ -176,8 +176,6 @@ public static class EventServiceExtensions
             if (parameters.TileMatrixSet != null) proto.TileMatrixSet = parameters.TileMatrixSet;
         }
 
-        proto.Categories.AddRange(layer.Categories);
-
         return proto;
     }
 
@@ -185,7 +183,7 @@ public static class EventServiceExtensions
     {
         Id = source.Id,
         Title = source.Title,
-        SourceUrl = source.SourceUrl,
+        SourceUrl = source.ExternalHomepageUrl,
         EventsUrl = source.EventsUrl,
     };
 

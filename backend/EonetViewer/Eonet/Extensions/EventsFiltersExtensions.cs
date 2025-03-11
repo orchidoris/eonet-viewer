@@ -1,6 +1,6 @@
 ﻿namespace Eonet;
 
-internal static class InternalEventsQueryExtensions
+internal static class EventsFiltersExtensions
 {
     public static RawEventsQuery? ToRawQuery(this EventsFilters? query) =>
         query == null
@@ -10,7 +10,7 @@ internal static class InternalEventsQueryExtensions
             category: query.Categories?.Any() == true ? query.Categories : null,
             status: query.Status == EventStatusFilter.Open ? null : query.Status.ToString().ToLower(),
             limit: query.Limit,
-            days: query.Days,
+            days: query.DaysPrior,
             start: query.Start?.ToString("yyyy-MM-dd"),
             end: query.End?.ToString("yyyy-MM-dd"),
             magID: query.Magnitude?.Id,

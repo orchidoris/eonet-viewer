@@ -1,6 +1,4 @@
 ﻿using Refit;
-using System.ComponentModel.DataAnnotations;
-using System.Threading.Tasks;
 
 namespace Eonet;
 
@@ -14,14 +12,15 @@ public interface IEonetClient
 
     [Get("/events")]
     [QueryUriFormat(UriFormat.Unescaped)]
-    internal Task<IApiResponse<EventsResponse>> GetEventsRaw([Query] RawEventsQuery? query);
+    internal Task<IApiResponse<EventsResponse>> GetEventsRaw([Query] RawEventsQuery? query, CancellationToken ct = default);
 
     /// <summary>
     /// Retrieves a list of events based on the provided filters.
     /// </summary>
     /// <param name="query">Filters applied to the event request.</param>
     /// <returns>Events matching provided filters.</returns>
-    Task<IApiResponse<EventsResponse>> GetEvents(EventsFilters? filters = null) => GetEventsRaw(filters.ToRawQuery());
+    Task<IApiResponse<EventsResponse>> GetEvents(EventsFilters? filters = null, CancellationToken ct = default) =>
+        GetEventsRaw(filters.ToRawQuery(), ct);
 
     /// <summary>
     /// Retrieves the list of acceptable sources from which the event was first curated,
@@ -30,14 +29,14 @@ public interface IEonetClient
     /// </summary>
     /// <returns>A list of available sources.</returns>
     [Get("/sources")]
-    Task<IApiResponse<SourcesResponse>> GetSources();
+    Task<IApiResponse<SourcesResponse>> GetSources(CancellationToken ct = default);
 
     /// <summary>
     /// Retrieves the list of available magnitudes for events.
     /// </summary>
     /// <returns>A list of available magnitudes.</returns>
     [Get("/magnitudes")]
-    Task<IApiResponse<MagnitudesResponse>> GetMagnitudes();
+    Task<IApiResponse<MagnitudesResponse>> GetMagnitudes(CancellationToken ct = default);
 
     /// <summary>
     /// Fetches a list of events filtered by the provided category query parameters.
@@ -45,7 +44,7 @@ public interface IEonetClient
     /// <param name="query">Filters applied to the categories request.</param>
     /// <returns>List of categories filtered according to the query parameters.</returns>
     [Get("/categories")]
-    Task<IApiResponse<CategoriesResponse>> GetCategories();
+    Task<IApiResponse<CategoriesResponse>> GetCategories(CancellationToken ct = default);
 
     /// <summary>
     /// Fetches a list of layers filtered by category.
@@ -53,81 +52,75 @@ public interface IEonetClient
     /// <param name="categoryId">The category ID to filter the layers.</param>
     /// <returns>List of layers filtered by the specified category.</returns>
     [Get("/layers/{categoryId}")]
-    Task<IApiResponse<LayersResponse>> GetLayers(string categoryId);
+    Task<IApiResponse<LayersResponse>> GetLayers(string categoryId, CancellationToken ct = default);
 
     /// <summary>
     /// Fetches all available categories, layers, sources, and magnitudes.
     /// Includes categories-layers many-to-many mapping inlined into both categories and layers.
     /// </summary>
-    async Task<IApiResponse<ContextResponse>> GetContext()
+    async Task<IApiResponse<ContextResponse>> GetContext(CancellationToken ct = default)
     {
         // ⚠️ Premature optimization.
-        //    In a real-world business app, the performance gain achieved
-        //    with the parallelization below in such low-traffic method is not as valuable
-        //    as the lost code redability leading to increased cost of maintanence.
+        //    In a real-world business app, the parallelization below complicates code maintainence
+        //    while the performance gain is not nearly as valuable in such a low-traffic method.
         // But hey! It's my pet-project and I'm having fun here playing with C# Tasks ⭐
 
-        var cts = new CancellationTokenSource();
+        var cts = CancellationTokenSource.CreateLinkedTokenSource(ct);
         IApiResponse<ContextResponse>? failedApiResponse = null;
-        bool cancelIfNotSuccessful<T>(Task<IApiResponse<T>> task) where T : class
+        bool cancelIfFailed(IApiResponse apiResponse)
         {
-            if (task.Result.IsSuccessful == true) return false;
+            if (apiResponse.IsSuccessful == true)
+                return false;
 
-            failedApiResponse = task.Result?.ToApiResponse<ContextResponse>();
+            failedApiResponse = apiResponse.ToApiResponse<ContextResponse>();
             cts.Cancel();
             return true;
         }
 
-        var sourcesTask = GetSources();
-        var processSourcesTask = sourcesTask.ContinueWith(cancelIfNotSuccessful);
+        var sourcesTask = GetSources(cts.Token).ContinueWith(t => cancelIfFailed(t.Result) ? default : t.Result, cts.Token);
+        var magnitudesTask = GetMagnitudes(cts.Token).ContinueWith(t => cancelIfFailed(t.Result) ? default : t.Result, cts.Token);
+        var categoriesAndLayersTask = GetCategoriesAndLayers(cancelIfFailed, cts.Token);
 
-        var magnitudesTask = GetMagnitudes();
-        var processMagnitudesTask = magnitudesTask.ContinueWith(cancelIfNotSuccessful);
-
-        var categoriesTask = GetCategories();
-        var layersTask = categoriesTask.ContinueWith(async task =>
-        {
-            if (cts.Token.IsCancellationRequested || cancelIfNotSuccessful(task))
-                return (new List<CategoryWithLayers>(), new List<LayerWithCategories>());
-
-            var categories = task.Result.Content!.Categories;
-            var categoriesWithLayers = new List<CategoryWithLayers>(categories.Count);
-            var uniqueLayersWithCategories = new Dictionary<string, (Layer Layer, List<string> Categories)>(KnownLayerId.All.Count);
-
-            var layersTasks = categories.Select(async category =>
-            {
-                if (cts.Token.IsCancellationRequested) return;
-
-                // EONET v3 layers endpoint returns result without mapping to categories
-                // so we need to call it for each category separatelly.
-                var categoryLayersTask = GetLayers(category.Id);
-                var categoryLayersApiResponse = await categoryLayersTask;
-                if (cancelIfNotSuccessful(categoryLayersTask))
-                    return;
-
-                var categoryLayers = categoryLayersApiResponse.Content!.Categories[0].Layers;
-                categoriesWithLayers.Add(new(category, categoryLayers.Select(l => l.Id).ToList()));
-
-                // collect unique layers and category ids associated with them
-                foreach (var layer in categoryLayers)
-                    if (!uniqueLayersWithCategories.TryAdd(layer.Id, new(layer, [category.Id])))
-                        uniqueLayersWithCategories[layer.Id].Categories.Add(category.Id);
-            });
-
-            await Task.WhenAll(layersTasks);
-
-            return (categoriesWithLayers, uniqueLayersWithCategories.Values.Select(v => new LayerWithCategories(v.Layer, [.. v.Categories])).ToList());
-        }).Unwrap();
-
-        await Task.WhenAll(processSourcesTask, processMagnitudesTask, layersTask);
+        await Task.WhenAll(sourcesTask, magnitudesTask, categoriesAndLayersTask);
         if (failedApiResponse != null)
             return failedApiResponse;
 
-        var (categories, layers) = layersTask.Result;
-        return categoriesTask.Result.ToApiResponse<ContextResponse>(new(
+        var (categories, layers) = categoriesAndLayersTask.Result;
+        return sourcesTask.Result!.ToApiResponse<ContextResponse>(new(
             categories,
-            sourcesTask.Result.Content!.Sources,
-            magnitudesTask.Result.Content!.Magnitudes,
+            sourcesTask.Result!.Content!.Sources,
+            magnitudesTask.Result!.Content!.Magnitudes,
             layers));
+    }
+
+    private async Task<(IReadOnlyList<CategoryWithLayers>, IReadOnlyList<Layer>)> GetCategoriesAndLayers(
+        Func<IApiResponse, bool> cancelIfFailed, CancellationToken ct = default)
+    {
+        return await GetCategories(ct).ContinueWith(async task =>
+        {
+            if (ct.IsCancellationRequested || cancelIfFailed(task.Result))
+                return ([], []);
+
+            var uniqueLayers = new Dictionary<string, Layer>(KnownLayerId.All.Count + 10);
+            var categories = task.Result.Content!.Categories;
+            var categoriesWithLayers = await Task.WhenAll(categories.Select(async category =>
+            {
+                if (ct.IsCancellationRequested) return null!;
+
+                // EONET v3 layers endpoint returns result without mapping to categories
+                // so we need to retrieve layers per category and receive the same layers multimple times.
+                var categoryLayersApiResponse = await GetLayers(category.Id, ct);
+                if (cancelIfFailed(categoryLayersApiResponse))
+                    return null!;
+
+                var layers = categoryLayersApiResponse.Content!.Categories[0].Layers;
+                foreach (var layer in layers)
+                    uniqueLayers.TryAdd(layer.Id, layer);
+
+                return category.WithLayers(layers.Select(l => l.Id));
+            }));
+
+            return (categoriesWithLayers, uniqueLayers.Values.ToList());
+        }, ct).Unwrap();
     }
 }

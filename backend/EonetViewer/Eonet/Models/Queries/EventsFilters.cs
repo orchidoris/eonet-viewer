@@ -7,7 +7,7 @@
 /// <param name="Categories">Filter by event categories, none - means all categories.</param>
 /// <param name="Status">Filter based on events having a closed date.</param>
 /// <param name="Limit">Limits the number of events returned.</param>
-/// <param name="Days">Limit the number of prior days (including today) from which events will be returned.</param>
+/// <param name="DaysPrior">Limit the number of the days prior (including today) from which events will be returned.</param>
 /// <param name="Start">Min date of events.</param>
 /// <param name="End">Max date of events.</param>
 /// <param name="Magnitude">A ceiling, floor, or range of magnitude values for the events.</param>
@@ -15,9 +15,9 @@
 public record EventsFilters(
     IReadOnlyList<string>? Sources = null,
     IReadOnlyList<string>? Categories = null,
-    EventStatusFilter Status = EventStatusFilter.Open,
+    EventStatusFilter Status = default,
     int? Limit = null,
-    int? Days = null,
+    int? DaysPrior = null,
     DateOnly? Start = null,
     DateOnly? End = null,
     MagnitudeFilter? Magnitude = null,
@@ -26,7 +26,7 @@ public record EventsFilters(
 
 [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE1006:Naming Styles", Justification = 
     "Refit serializes this model as-is into query parameters for case-sensitive EONET API. " +
-    "Instead, a corresponding public API model follows .NET naming conventions.")]
+    "In the meanwile, the public API model follows .NET naming conventions.")]
 internal record RawEventsQuery(
     IReadOnlyList<string>? source,
     IReadOnlyList<string>? category,
@@ -41,18 +41,16 @@ internal record RawEventsQuery(
     IReadOnlyList<double>? bbox
 );
 
-/// <summary>
-/// Filter based on events having a closed date.
-/// </summary>
+/// <summary>Status filter based on events having closed date.</summary>
 public enum EventStatusFilter
 {
-    /// <summary>Events have no closed date.</summary>
-    Open = 0,
+    /// <summary>Value matching events having no closed date.</summary>
+    Open,
 
-    /// <summary>Events have a closed date.</summary>
+    /// <summary>Value matching events having closed date.</summary>
     Closed,
 
-    /// <summary>All events, regardless of having a closed date or not.</summary>
+    /// <summary>Value matching all events, regardless of having a closed date or not.</summary>
     All
 }
 

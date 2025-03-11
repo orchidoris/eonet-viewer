@@ -48,5 +48,5 @@ public record EventCategory(
 public record EventSource(
     string Id,
     [property: JsonPropertyName("url")]
-    string EventSourceUrl
+    string ExternalSourceEventUrl
 );

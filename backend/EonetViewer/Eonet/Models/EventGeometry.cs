@@ -12,7 +12,7 @@ namespace Eonet;
 /// <param name="MagnitudeValue">Magnitude value of the event.</param>
 public abstract record EventGeometry(
     DateTimeOffset Date,
-    EventGeometryType Type,
+    GeometryType Type,
     string? MagnitudeUnit,
     double? MagnitudeValue
 );
@@ -28,14 +28,14 @@ public abstract record EventGeometry(
 public record EventPointGeometry(
     DateTimeOffset Date,
     Position Coordinates,
-    EventGeometryType Type = EventGeometryType.Point,
+    GeometryType Type = GeometryType.Point,
     string? MagnitudeUnit = null,
     double? MagnitudeValue = null
 ) : EventGeometry(
     Date,
-    Type == EventGeometryType.Point
-        ? EventGeometryType.Point
-        : throw new ArgumentException($"{EventGeometryType.Point} type expected, but encountered {Type}"),
+    Type == GeometryType.Point
+        ? GeometryType.Point
+        : throw new ArgumentException($"{GeometryType.Point} type expected, but encountered {Type}"),
     MagnitudeUnit,
     MagnitudeValue);
 
@@ -50,15 +50,15 @@ public record EventPointGeometry(
 public record EventPolygonGeometry(
     DateTimeOffset Date,
     IReadOnlyList<LineString> Coordinates,
-    EventGeometryType Type = EventGeometryType.Polygon,
+    GeometryType Type = GeometryType.Polygon,
     
     string? MagnitudeUnit = null,
     double? MagnitudeValue = null
 ) : EventGeometry(
     Date,
-    Type == EventGeometryType.Polygon 
-        ? EventGeometryType.Polygon
-        : throw new ArgumentException($"{EventGeometryType.Polygon} type expected, but encountered {Type}"),
+    Type == GeometryType.Polygon 
+        ? GeometryType.Polygon
+        : throw new ArgumentException($"{GeometryType.Polygon} type expected, but encountered {Type}"),
     MagnitudeUnit,
     MagnitudeValue)
 {
@@ -68,7 +68,7 @@ public record EventPolygonGeometry(
 /// Type of event geometry.
 /// </summary>
 [JsonConverter(typeof(JsonStringEnumConverter))]
-public enum EventGeometryType
+public enum GeometryType
 {
     Point,
     Polygon,

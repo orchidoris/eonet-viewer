@@ -1,4 +1,5 @@
 using Eonet;
+using EonetViewer.Api.BackgroundServices;
 using EonetViewer.Api.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,6 +13,7 @@ builder.Services.AddCors(o => o.AddPolicy("AllowAll", builder => builder
 
 builder.Services.AddControllers();
 builder.Services.AddEonet(builder.Configuration);
+builder.Services.AddHostedService<EventsLoaderService>();
 
 var app = builder.Build();
 

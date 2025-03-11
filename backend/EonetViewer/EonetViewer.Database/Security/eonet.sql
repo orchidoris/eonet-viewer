@@ -1,0 +1,3 @@
+﻿CREATE SCHEMA [eonet]
+    AUTHORIZATION [dbo];
+
