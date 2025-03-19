@@ -1,6 +1,7 @@
 body {
   --docs-header-height: 60px;
-  --eonet-navbar-width: 200px;
+  --eonet-navbar-width: 350px;
+  --filters-width: 300px;
   --docs-table-of-contents-width: 260px;
   --docs-mdx-content-width: 820px;
 }

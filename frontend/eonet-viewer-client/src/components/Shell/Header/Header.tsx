@@ -1,41 +1,34 @@
-import { AppShell } from '@mantine/core';
-import { IconMenu2 } from '@tabler/icons-react';
+import { AppShell, rem } from '@mantine/core';
+import { IconCompass, IconFilter, IconLayoutGrid, IconWorldBolt } from '@tabler/icons-react';
+
+import { HeaderMainLink } from './HeaderMainLink';
 import classes from './Header.module.css';
 import { cx } from '../../../helpers';
+import { emitFiltersToggle } from '../../../events';
 import nasaLogo from '../../../assets/nasa.svg';
-import { useCallback } from 'react';
 
-interface HeaderProps {
-  onNavbarToggle: () => void;
-  onNavbarClose: () => void;
-}
-
-export function Header({
-  className,
-  onNavbarToggle,
-  onNavbarClose,
-  ...props
-}: HeaderProps & Readonly<React.HTMLProps<HTMLElement>>) {
-  const onMenuClick = useCallback(
-    (e: React.MouseEvent) => {
-      onNavbarToggle();
-      e.stopPropagation();
-    },
-    [onNavbarToggle],
-  );
-
+export function Header({ className, ...props }: Readonly<React.HTMLProps<HTMLElement>>) {
   return (
-    <AppShell.Header
-      withBorder={false}
-      classNames={{ header: cx(classes.header, className) }}
-      {...props}
-      onClick={onNavbarClose}
-    >
-      <div className={classes.brand}>
+    <AppShell.Header withBorder={false} classNames={{ header: cx(classes.header, className) }} {...props}>
+      <div className={classes.left}>
         <img src={nasaLogo} className={classes.logo} alt="EONET Viewer" />
         <h1 className={classes.appName}>EONET Viewer</h1>
+        <div className={classes.links}>
+          <HeaderMainLink icon={<IconLayoutGrid style={{ width: rem(25), height: rem(25) }} stroke={1.5} />} to="/">
+            List
+          </HeaderMainLink>
+          <HeaderMainLink icon={<IconCompass style={{ width: rem(25), height: rem(25) }} stroke={1.5} />} to="/map">
+            Map
+          </HeaderMainLink>
+          <HeaderMainLink
+            icon={<IconWorldBolt style={{ width: rem(25), height: rem(25) }} stroke={1.5} />}
+            href="https://eonet.gsfc.nasa.gov/"
+          >
+            Go to EONET
+          </HeaderMainLink>
+        </div>
       </div>
-      <IconMenu2 className={classes.burgerButton} onClick={onMenuClick} aria-label="Toggle navbar" stroke={1} />
+      <IconFilter className={classes.iconButton} aria-label="Toggle navbar" stroke={1} onClick={emitFiltersToggle} />
     </AppShell.Header>
   );
 }

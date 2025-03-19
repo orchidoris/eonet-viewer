@@ -75,7 +75,8 @@ public static class EventServiceExtensions
         {
             Id = response.Id,
             Title = response.Title,
-            Url = response.Url
+            Url = response.Url,
+            StartDate = response.Geometry.Min(g => g.Date).ToTimestamp(),
         };
 
         if (response.Description != null) proto.Description = response.Description;

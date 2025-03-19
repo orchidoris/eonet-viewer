@@ -2,9 +2,8 @@
 {
     public class EventsLoaderService: BackgroundService
     {
-        protected override Task ExecuteAsync(CancellationToken cancellationToken)
+        protected override async Task ExecuteAsync(CancellationToken cancellationToken)
         {
-            throw new NotImplementedException("EventsLoaderService is not implemented yet.");
         }
     }
 }

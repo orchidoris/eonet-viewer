@@ -1,11 +1,13 @@
 import './index.css';
 import '@mantine/core/styles.css';
 import '@mantine/notifications/styles.css';
+import '@mantine/dates/styles.css';
 
 import { MantineProvider, createTheme } from '@mantine/core';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
-import { EventsContextProvider } from './contexts';
+import { ContextsProvider } from './contexts';
+import { DatesProvider } from '@mantine/dates';
 import { Notifications } from '@mantine/notifications';
 import { Routes as Router } from './Router';
 import { RouterProvider } from 'react-router-dom';
@@ -40,13 +42,15 @@ const queryClient = new QueryClient({
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <QueryClientProvider client={queryClient}>
-      <MantineProvider theme={theme}>
-        <Notifications position="top-right" />
-        <EventsContextProvider>
-          <RouterProvider router={Router} />
-        </EventsContextProvider>
-      </MantineProvider>
-    </QueryClientProvider>
+    <DatesProvider settings={{ locale: 'en', firstDayOfWeek: 1, weekendDays: [0, 6], timezone: 'UTC' }}>
+      <QueryClientProvider client={queryClient}>
+        <MantineProvider theme={theme}>
+          <Notifications position="top-right" />
+          <ContextsProvider>
+            <RouterProvider router={Router} />
+          </ContextsProvider>
+        </MantineProvider>
+      </QueryClientProvider>
+    </DatesProvider>
   </StrictMode>,
 );

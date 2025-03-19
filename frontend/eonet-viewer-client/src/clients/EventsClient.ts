@@ -1,6 +1,5 @@
 import {
-  EventCategory,
-  EventSource,
+  EventCategoryId,
   EventStatus,
   EventsContext,
   EventsRequest,
@@ -31,8 +30,11 @@ const getEvents = async (request: EventsRequest): Promise<EventsResponse> => {
     events: response.events.map((event) => ({
       ...event,
       closedDate: event.closedDate ? timestampDate(event.closedDate) : undefined,
-      categories: event.categories as EventCategory[],
-      sources: event.sources as EventSource[],
+      categories: event.categories.map((category) => ({
+        ...category,
+        id: category.id as EventCategoryId,
+      })),
+      sources: event.sources,
       geometries: event.geometries.map((geometry) => ({
         ...geometry,
         date: geometry.date ? timestampDate(geometry.date) : new Date(),
@@ -50,7 +52,13 @@ export const useGetEvents = (request: EventsRequest) =>
 
 const getEventsContext = async (): Promise<EventsContext> => {
   const response = await client.getEventsContext({});
-  return response;
+  return {
+    ...response,
+    categories: response.categories.map((category) => ({
+      ...category,
+      id: category.id as EventCategoryId,
+    })),
+  };
 };
 
 export const useGetEventsContext = () =>

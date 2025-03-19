@@ -1,54 +1,36 @@
-import { Card, Code, Flex, SimpleGrid, Text } from '@mantine/core';
-import { EventStatus, useGetEvents } from '../clients';
+import { EventsFilters, EventsFiltersFormValues, Page } from '../components';
+import { getTodayUtc, useDocumentTitle } from '../helpers';
+import { useMemo, useState } from 'react';
 
-import { EventCategoryIcon } from '../components/EventCategoryIcon/EventCategoryIcon';
-import { IconExternalLink } from '@tabler/icons-react';
-import { Section } from '../components';
+import { EventsGrid } from '../components/EventsGrid';
 import classes from './EventsPage.module.css';
-import { useDocumentTitle } from '../helpers';
+import { getEventsRequest } from './EventsPage.core';
 import { useEventsContext } from '../contexts';
+import { useGetEvents } from '../clients';
+import { useOnFiltersToggle } from '../events';
+import { useToggle } from '@mantine/hooks';
 
 export function EventsPage() {
   useDocumentTitle('Natural Events');
-  const { sources } = useEventsContext();
-  const [events, eventsResult] = useGetEvents({
-    limit: 50,
-    status: EventStatus.CLOSED,
-    start: new Date('2000-01-04Z'),
-    end: new Date('2020-01-04Z'),
-  });
+  const { isLoading: contextIsLoading } = useEventsContext();
+  const [filtersVisible, toggleFilters] = useToggle([true, false]);
+  useOnFiltersToggle(() => toggleFilters());
 
-  console.log(events);
-  console.log(eventsResult);
-  const isLoading = eventsResult.isFetching || eventsResult.isPending;
+  const [filters, setFilters] = useState<Partial<EventsFiltersFormValues>>(() => ({
+    dates: [getTodayUtc().subtract(10, 'day').toDate(), getTodayUtc().toDate()],
+  }));
+
+  const eventsRequest = useMemo(() => getEventsRequest(filters), [filters]);
+  const [events, eventsResult] = useGetEvents(eventsRequest);
+
+  const isLoading = eventsResult.isFetching || eventsResult.isPending || contextIsLoading;
 
   return (
-    <Section isLoading={isLoading}>
-      <SimpleGrid className={classes.grid} cols={{ base: 1, xs: 2, md: 3, lg: 4, xl: 5 }} verticalSpacing="lg">
-        {events?.events.map((event) => (
-          <Card key={event.id} className={classes.card} shadow="sm" padding="lg" radius="md" withBorder>
-            <Flex className={classes.categories} gap="xs">
-              {event.categories.map((category) => (
-                <Code>{category.title}</Code>
-              ))}
-            </Flex>
-            <a href={event.sources[0].eventSourceUrl} target="_blank" title={sources[event.sources[0].id].title}>
-              <IconExternalLink className={classes.goToSource} size={14} stroke={1.2} />
-            </a>
-            <Flex className={classes.header} gap="sm">
-              <EventCategoryIcon className={classes.icon} category={event.categories[0]} />
-              <Text fw={500} lineClamp={2}>
-                {event.title}
-              </Text>
-            </Flex>
-            {event.description ? (
-              <Text size="sm" c="dimmed" mt="sm" lineClamp={3}>
-                {event.description}
-              </Text>
-            ) : undefined}
-          </Card>
-        ))}
-      </SimpleGrid>
-    </Section>
+    <Page className={classes.root} isLoading={isLoading} {...(filtersVisible && { 'data-filters-visible': '' })}>
+      <div className={classes.filtersContainer}>
+        <EventsFilters className={classes.filters} value={filters} onSubmit={setFilters} />
+      </div>
+      <EventsGrid events={events?.events} className={classes.events} />
+    </Page>
   );
 }

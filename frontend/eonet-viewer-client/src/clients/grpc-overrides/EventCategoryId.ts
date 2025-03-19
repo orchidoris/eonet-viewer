@@ -1,4 +1,5 @@
 export enum EventCategoryId {
+  None = '',
   Drought = 'drought',
   DustHaze = 'dustHaze',
   Earthquakes = 'earthquakes',

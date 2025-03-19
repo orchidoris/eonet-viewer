@@ -1,0 +1,16 @@
+.root {
+  display: flex;
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+  padding: 2px;
+  color: var(--mantine-color-blue-light-color);
+  border-radius: var(--mantine-radius-sm);
+  cursor: pointer;
+
+  @mixin hover {
+    background-color: var(--mantine-color-blue-light-hover);
+  }
+}

@@ -1,0 +1,15 @@
+.categorySelectOptionIcon {
+  height: 16px;
+  width: 16px;
+}
+
+.check {
+  height: 12px;
+  width: 12px;
+  visibility: hidden;
+
+  &[data-checked] {
+    color: var(--mantine-color-dimmed);
+    visibility: visible;
+  }
+}

@@ -3,6 +3,7 @@ export * from '../grpc-generated';
 import {
   EventStatus,
   EventsContextResponse,
+  Category as GrpcCategory,
   Event as GrpcEvent,
   EventCategory as GrpcEventCategory,
   EventGeometry as GrpcEventGeometry,
@@ -12,9 +13,14 @@ import {
 
 import { EventCategoryId } from './EventCategoryId';
 
-export interface EventCategory extends Omit<GrpcEventCategory, 'id'> {
+export interface EventCategory extends Omit<GrpcEventCategory, 'id' | '$typeName'> {
   id: EventCategoryId;
 }
+
+export const defaultEventCategory: EventCategory = {
+  id: EventCategoryId.None,
+  title: '',
+};
 
 export interface EventGeometry extends Omit<GrpcEventGeometry, 'date'> {
   date: Date;
@@ -44,7 +50,13 @@ export interface EventsRequest
   status?: EventStatus;
 }
 
-export type EventsContext = Omit<EventsContextResponse, '$typeName'>;
+export interface Category extends Omit<GrpcCategory, 'id' | '$typeName'> {
+  id: EventCategoryId;
+}
+
+export interface EventsContext extends Omit<EventsContextResponse, 'categories' | '$typeName'> {
+  categories: Category[];
+}
 
 export const defaultEventsContext: EventsContext = {
   categories: [],

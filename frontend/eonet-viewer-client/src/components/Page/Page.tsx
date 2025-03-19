@@ -1,21 +1,21 @@
 import { LoadingOverlay } from '@mantine/core';
-import classes from './Section.module.css';
+import classes from './Page.module.css';
 import { cx } from '../../helpers';
 
 interface SectionProps {
   isLoading?: boolean;
 }
 
-export function Section({
+export function Page({
   children,
   className,
   isLoading,
   ...props
-}: Readonly<SectionProps> & React.HTMLProps<HTMLElement>) {
+}: Readonly<SectionProps> & React.HTMLProps<HTMLDivElement>) {
   return (
-    <section className={cx(classes.section, className)} {...props}>
+    <div className={cx(classes.root, className)} {...props}>
       <LoadingOverlay visible={isLoading} />
       {children}
-    </section>
+    </div>
   );
 }

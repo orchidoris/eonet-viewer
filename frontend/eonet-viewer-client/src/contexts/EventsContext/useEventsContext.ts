@@ -1,17 +1,20 @@
 import { Category, EventCategoryId, Layer, Magnitude, Source } from '../../clients';
 import { createContext, useContext } from 'react';
 
+export type EventsContextCategories = { [categoryId in EventCategoryId]?: Category };
+export type EventsContextSources = { [sourceId: string]: Source };
+
 export interface EventsContext {
-  isLoaded: boolean;
-  categories: { [categoryId in EventCategoryId]?: Category };
+  isLoading: boolean;
+  categories: EventsContextCategories;
   layers: { [layerId: string]: Layer };
-  sources: { [sourceId: string]: Source };
+  sources: EventsContextSources;
   magnitudes: { [magnitudeId: string]: Magnitude };
   magnitudesByUnit: { [magnitudeUnit: string]: Magnitude };
 }
 
 export const eventsContext = createContext<EventsContext>({
-  isLoaded: false,
+  isLoading: false,
   categories: {},
   layers: {},
   sources: {},

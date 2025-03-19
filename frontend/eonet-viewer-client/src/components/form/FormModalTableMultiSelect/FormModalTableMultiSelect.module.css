@@ -1,0 +1,11 @@
+.icon {
+  cursor: pointer;
+
+  @mixin light {
+    color: var(--mantine-color-gray-6);
+  }
+}
+
+.iconSquareCheck {
+  margin-right: 2px;
+}
