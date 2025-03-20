@@ -6,6 +6,7 @@ import { useDisclosure, useUncontrolled } from '@mantine/hooks';
 
 import classes from './FormModalTableMultiSelect.module.css';
 import { cx } from '../../../helpers';
+import { useCallback } from 'react';
 
 export interface FormModalTableMultiSelectLabels {
   label?: string;
@@ -28,6 +29,16 @@ export interface FormModalTableMultiSelectProps<
   labels?: FormModalTableMultiSelectLabels;
 }
 
+export interface InputProps<T> {
+  onChange: (value: T) => void;
+  value?: T;
+  defaultValue?: T;
+  checked?: boolean;
+  error?: React.ReactNode;
+  onFocus?: React.FocusEventHandler | undefined;
+  onBlur?: React.FocusEventHandler | undefined;
+}
+
 export const FormModalTableMultiSelect = ({
   form,
   field,
@@ -40,7 +51,7 @@ export const FormModalTableMultiSelect = ({
 }: FormModalTableMultiSelectProps) => {
   const [opened, { open, close }] = useDisclosure(false);
 
-  const { onChange, value, defaultValue, error, onFocus, onBlur } = form.getInputProps(field);
+  const { onChange, value, defaultValue, error, onFocus, onBlur } = form.getInputProps(field) as InputProps<string[]>;
   const optionsCount = data.body?.length ?? 0;
   const valueCount = value?.length ?? 0;
   const allSelected = optionsCount == valueCount;
@@ -51,6 +62,10 @@ export const FormModalTableMultiSelect = ({
     finalValue: [],
     onChange,
   });
+
+  const onCheckAll = useCallback(() => {
+    setValue(data.body?.map((row) => row.value) ?? []);
+  }, [data.body, setValue]);
 
   return (
     <>
@@ -77,7 +92,7 @@ export const FormModalTableMultiSelect = ({
                   className={cx(classes.icon, classes.iconSquareCheck)}
                   stroke={0.8}
                   size="1.2rem"
-                  onClick={() => setValue(data.body?.map((row) => row.value) ?? [])}
+                  onClick={onCheckAll}
                 />
               )}
             </>
@@ -93,7 +108,7 @@ export const FormModalTableMultiSelect = ({
               ? labels.summary(optionsCount, valueCount)
               : allSelected
                 ? 'All options included'
-                : `${valueCount}/${optionsCount} options included`}
+                : `${valueCount.toString()}/${optionsCount.toString()} options included`}
           </div>
         )}
       </InputBase>

@@ -11,7 +11,7 @@ interface HeaderMainLinkProps extends React.ComponentPropsWithoutRef<'a'> {
   icon: React.ReactNode;
 }
 
-export function HeaderMainLink({ children, icon, className, href, to }: HeaderMainLinkProps) {
+export function HeaderMainLink({ children, icon, className, href, to, ...props }: HeaderMainLinkProps) {
   const external = !!href;
   const location = useLocation();
   return (
@@ -23,6 +23,7 @@ export function HeaderMainLink({ children, icon, className, href, to }: HeaderMa
       target={external ? '_blank' : undefined}
       className={cx(classes.link, className)}
       mod={{ active: location.pathname === to }}
+      {...props}
     >
       <span className={classes.icon}>{icon}</span>
       <span className={classes.label}>{children}</span>

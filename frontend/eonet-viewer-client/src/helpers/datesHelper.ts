@@ -29,7 +29,7 @@ export const getDateTimeString = (dateString: string) => {
 
 export const getMinDate = (date1?: Date | null, date2?: Date | null): Date | undefined => {
   if (!date1) return date2 ?? undefined;
-  if (!date2) return date1 ?? undefined;
+  if (!date2) return date1;
 
   return date1 < date2 ? date1 : date2;
 };

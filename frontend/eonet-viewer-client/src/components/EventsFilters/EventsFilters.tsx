@@ -87,7 +87,7 @@ export function EventsFilters({ value, ...props }: EventsFiltersProps) {
           <Group justify="flex-end">
             {isDirty && (
               <Text size="xs" c="dimmed">
-                Filters will be applied after "Submit" click
+                {'Filters will be applied after "Submit" click'}
               </Text>
             )}
           </Group>

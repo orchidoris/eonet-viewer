@@ -6,7 +6,6 @@ import '@mantine/dates/styles.css';
 import { MantineProvider, createTheme } from '@mantine/core';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
-import { ContextsProvider } from './contexts';
 import { DatesProvider } from '@mantine/dates';
 import { Notifications } from '@mantine/notifications';
 import { Routes as Router } from './Router';
@@ -40,17 +39,20 @@ const queryClient = new QueryClient({
   },
 });
 
-createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <DatesProvider settings={{ locale: 'en', firstDayOfWeek: 1, weekendDays: [0, 6], timezone: 'UTC' }}>
-      <QueryClientProvider client={queryClient}>
-        <MantineProvider theme={theme}>
-          <Notifications position="top-right" />
-          <ContextsProvider>
+const rootElement = document.getElementById('root');
+if (!rootElement) {
+  console.error('Root element not found!');
+} else {
+  createRoot(rootElement).render(
+    <StrictMode>
+      <DatesProvider settings={{ locale: 'en', firstDayOfWeek: 1, weekendDays: [0, 6], timezone: 'UTC' }}>
+        <QueryClientProvider client={queryClient}>
+          <MantineProvider theme={theme}>
+            <Notifications position="top-right" />
             <RouterProvider router={Router} />
-          </ContextsProvider>
-        </MantineProvider>
-      </QueryClientProvider>
-    </DatesProvider>
-  </StrictMode>,
-);
+          </MantineProvider>
+        </QueryClientProvider>
+      </DatesProvider>
+    </StrictMode>,
+  );
+}

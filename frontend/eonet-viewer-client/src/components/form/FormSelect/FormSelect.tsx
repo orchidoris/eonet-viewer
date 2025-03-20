@@ -22,7 +22,7 @@ export function FormSelect<
       allowDeselect={!required}
       withAsterisk={!!required}
       clearable={!required}
-      placeholder={`Select ${props.label}`}
+      placeholder={typeof props.label === 'string' ? `Select ${props.label}` : undefined}
       searchable
       {...props}
     />

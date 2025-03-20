@@ -18,14 +18,14 @@ export const grpcWebTransport = createGrpcWebTransport({
   baseUrl: env.apiBaseUrl,
 });
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+// eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-member-access
 const isConnectError = (error: any): error is ConnectError => error?.name === 'ConnectError';
 
 export const MAX_ERROR_MESSAGE_LEN = 250;
 export const cropMessage = (message: string) =>
   message.length > MAX_ERROR_MESSAGE_LEN ? `${message.substring(0, MAX_ERROR_MESSAGE_LEN)}...` : message;
 
-export const getErrorNotification = <TError>(error: TError): { title: string; message: string } => {
+export const getErrorNotification = (error: unknown): { title: string; message: string } => {
   if (isConnectError(error)) return { title: `Network error`, message: cropMessage(error.rawMessage) };
 
   return { title: `Unknown error`, message: JSON.stringify(error) };
@@ -38,8 +38,8 @@ interface RequestNotificationsParams {
   };
 }
 
-const useShowNotifications = <TError>(
-  error: TError,
+const useShowNotifications = (
+  error: unknown,
   isSuccess: boolean,
   { successNotification }: RequestNotificationsParams,
 ) => {

@@ -14,7 +14,7 @@ export function Page({
 }: Readonly<SectionProps> & React.HTMLProps<HTMLDivElement>) {
   return (
     <div className={cx(classes.root, className)} {...props}>
-      <LoadingOverlay visible={isLoading} />
+      <LoadingOverlay className={classes.loadingOverlay} visible={isLoading} />
       {children}
     </div>
   );

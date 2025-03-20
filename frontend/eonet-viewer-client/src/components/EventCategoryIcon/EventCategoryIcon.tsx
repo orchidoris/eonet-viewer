@@ -4,7 +4,7 @@ import { EventCategoryId } from '../../clients';
 import { HTMLAttributes } from 'react';
 import classes from './EventCategoryIcon.module.css';
 import { cx } from '../../helpers';
-import { useEventsContext } from '../../contexts';
+import { useEventsContextState } from '../../state';
 
 interface EventCategoryIconProps extends MantineImageProps {
   categoryId: EventCategoryId;
@@ -15,8 +15,8 @@ export function EventCategoryIcon({
   categoryId,
   ...props
 }: EventCategoryIconProps & HTMLAttributes<HTMLImageElement>) {
-  const { categories } = useEventsContext();
-  const title = categories[categoryId]?.title;
+  const getCategory = useEventsContextState().categories.get;
+  const title = getCategory(categoryId)?.title;
 
   return (
     <Image src={getIconSrc(categoryId)} alt={title} title={title} className={cx(classes.icon, className)} {...props} />

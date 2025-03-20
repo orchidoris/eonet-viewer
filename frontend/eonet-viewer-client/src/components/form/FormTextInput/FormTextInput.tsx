@@ -16,5 +16,12 @@ export function FormTextInput<
   TransformValues extends _TransformValues<Values> = (values: Values) => Values,
 >({ form, field, required, ...props }: FormTextInputProps<Values, TransformValues>) {
   const inputProps = useMemo(() => form.getInputProps(field), [form, field]);
-  return <TextInput {...inputProps} withAsterisk={!!required} placeholder={`Enter ${props.label}`} {...props} />;
+  return (
+    <TextInput
+      {...inputProps}
+      withAsterisk={!!required}
+      placeholder={typeof props.label === 'string' ? `Enter ${props.label}` : undefined}
+      {...props}
+    />
+  );
 }

@@ -2,3 +2,8 @@
   flex: 1;
   position: relative;
 }
+
+.loadingOverlay {
+  height: 100vh;
+  position: fixed;
+}

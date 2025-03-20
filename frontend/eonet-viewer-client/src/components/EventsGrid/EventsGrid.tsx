@@ -5,14 +5,14 @@ import { EventCategoryIcon } from '../EventCategoryIcon';
 import { ExternalLinkIconButton } from '../ExternalLinkIconButton';
 import classes from './EventsGrid.module.css';
 import { cx } from '../../helpers';
-import { useEventsContext } from '../../contexts';
+import { useEventsContextState } from '../../state';
 
 interface EventsGridProps extends SimpleGridProps {
   events?: Event[];
 }
 
 export function EventsGrid({ events, className, ...props }: EventsGridProps) {
-  const { sources } = useEventsContext();
+  const getSource = useEventsContextState().sources.get;
   return (
     <SimpleGrid
       className={cx(classes.root, className)}
@@ -30,7 +30,7 @@ export function EventsGrid({ events, className, ...props }: EventsGridProps) {
           <ExternalLinkIconButton
             className={classes.sourceExternalLinkIconButton}
             href={event.sources[0].externalSourceEventUrl}
-            title={sources[event.sources[0].id]?.title}
+            title={getSource(event.sources[0].id)?.title}
           />
           <Flex className={classes.header} gap="sm">
             <EventCategoryIcon className={classes.icon} categoryId={event.categories[0].id} />

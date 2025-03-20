@@ -66,8 +66,6 @@ message BoundingBox {
   double min_latitude = 4; // Minimum latitude (bottom boundary).
 }
 
-
-
 // Natural event.
 message Event {
   string id = 1; // Unique event id.

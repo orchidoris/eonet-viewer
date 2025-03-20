@@ -11,7 +11,7 @@ interface ExternalLinkIconButtonProps {
 
 export function ExternalLinkIconButton({ href, title, className, children }: ExternalLinkIconButtonProps) {
   return (
-    <a className={classes.root} href={href} target="_blank" title={title}>
+    <a className={classes.root} href={href} target="_blank" rel="noreferrer" title={title}>
       {children}
       <IconExternalLink className={cx(classes.icon, className)} size={14} stroke={1.2} />
     </a>

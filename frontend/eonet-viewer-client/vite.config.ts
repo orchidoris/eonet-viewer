@@ -8,7 +8,7 @@ import path from 'path';
 import plugin from '@vitejs/plugin-react';
 
 const baseFolder =
-  env.APPDATA !== undefined && env.APPDATA !== '' ? `${env.APPDATA}/ASP.NET/https` : `${env.HOME}/.aspnet/https`;
+  env.APPDATA !== undefined && env.APPDATA !== '' ? `${env.APPDATA}/ASP.NET/https` : `${env.HOME ?? ''}/.aspnet/https`;
 
 const certificateName = 'eonet-viewer-client';
 const certFilePath = path.join(baseFolder, `${certificateName}.pem`);

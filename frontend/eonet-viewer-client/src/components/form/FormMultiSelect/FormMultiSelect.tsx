@@ -25,7 +25,7 @@ export function FormMultiSelect<
         {...inputProps}
         withAsterisk={!!required}
         clearable={!required}
-        placeholder={`Enter ${props.label}`}
+        placeholder={typeof props.label === 'string' ? `Enter ${props.label}` : undefined}
         onDropdownOpen={() => {
           lockScroll();
           if (onDropdownOpen) onDropdownOpen();
